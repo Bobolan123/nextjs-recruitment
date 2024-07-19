@@ -6,6 +6,9 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import theme from "@/theme";
 import { ThemeProvider } from "@mui/material";
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import Navbar from "@/components/_navbar/navbar-server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +37,7 @@ export default function RootLayout({
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
                         <AntdRegistry>
+                            <Navbar lng ={lng}/>
                             {children}
                         </AntdRegistry>
                     </ThemeProvider>

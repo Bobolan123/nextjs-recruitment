@@ -6,7 +6,7 @@ acceptLanguage.languages(languages)
 
 export const config = {
   // matcher: '/:lng*'
-  matcher: ['/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|site.webmanifest).*)']
+  matcher: ['/((?!api|_next/static|_next/image|assets|sw.js|site.webmanifest).*)']
 }
 
 export function middleware(req: NextRequest) {
@@ -15,7 +15,7 @@ export function middleware(req: NextRequest) {
   if (req.cookies.has(cookieName)) lng = acceptLanguage.get(req.cookies.get(cookieName)?.value)
   if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'))
   if (!lng) lng = fallbackLng
-
+ 
   // Redirect if lng in path is not supported
   if (
     !languages.some(loc => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
