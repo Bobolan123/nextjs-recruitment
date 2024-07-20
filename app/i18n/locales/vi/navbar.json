@@ -1,6 +1,14 @@
 {
-    "jobs":"Việc làm IT",
-    "companies":"Top công ty IT",
+    "jobs": "Việc làm IT",
+    "companies": "Top công ty IT",
     "sign_in": "Đăng nhập",
-    "sign_up": "Đăng ký"
+    "sign_up": "Đăng ký",
+    "profile": {
+        "profile_cv": "Hồ sơ & CVs",
+        "my_job": "Việc làm của tôi",
+        "job_invitation": "Lời mời công việc",
+        "email_subscription": "Đăng ký nhận email",
+        "setting": "Cài đặt",
+        "sign_out": "Đăng xuất"
+    }
 }

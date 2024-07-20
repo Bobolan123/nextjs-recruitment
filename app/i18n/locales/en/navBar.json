@@ -1,6 +1,14 @@
 {
     "jobs":"All Jobs",
     "companies":"IT Companies",
-    "sign_in": "Sign in",
-    "sign_up": "Sign up"
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "profile": {
+        "profile_cv": "Profile & CVs",
+        "my_job": "My Jobs",
+        "job_invitation": "Job Invitation",
+        "email_subscription": "Email Subscriptions",
+        "setting": "Settings",
+        "sign_out": "Sign Out"
+    }
 }
