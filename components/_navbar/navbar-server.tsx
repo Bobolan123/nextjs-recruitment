@@ -21,11 +21,13 @@ export default async function NavbarServer(props: INavbarServerProps) {
         t("profile.sign_out"),
     ];
     const pages = [t("jobs"), t("companies")];
-
+    const jobItems= [t("job_by_skill"),t("job_by_title"),t("job_by_company"),t("job_by_city"),]
+    const companyItems = [t("best_company"), t("company_review")]
+    
     return (
         <>
-            <AppBar
-                position="static"
+            <AppBar 
+                position="fixed"
                 className="bg-custom-gradient"
                 sx={{
                     height: 88.8,
@@ -35,7 +37,7 @@ export default async function NavbarServer(props: INavbarServerProps) {
             >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <NavbarLeft pages={pages} />
+                        <NavbarLeft pages={pages} jobItems={jobItems} companyItems={companyItems}/>
 
                         <NavbarRight
                             settings={settings}

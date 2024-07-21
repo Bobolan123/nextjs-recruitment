@@ -1,6 +1,14 @@
 {
     "jobs": "Việc làm IT",
+    "job_by_skill": "Việc làm IT theo kỹ năng",
+    "job_by_title": "Việc làm IT theo cấp bậc",
+    "job_by_company": "Việc làm IT theo công ty",
+    "job_by_city": "Việc làm IT theo thành phố",
+
     "companies": "Top công ty IT",
+    "best_company": "Công ty IT tốt nhất",
+    "company_review": "Đánh giá công ty",
+
     "sign_in": "Đăng nhập",
     "sign_up": "Đăng ký",
     "profile": {

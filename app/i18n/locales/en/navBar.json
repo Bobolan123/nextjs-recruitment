@@ -1,6 +1,14 @@
 {
     "jobs":"All Jobs",
+    "job_by_skill":"Jobs by Skill",
+    "job_by_title":"Jobs by Title",
+    "job_by_company":"Jobs by Company",
+    "job_by_city":"Jobs by City",
+
     "companies":"IT Companies",
+    "best_company": "Vietnam Best IT Company",
+    "company_review": "Company Reviews",
+    
     "sign_in": "Sign In",
     "sign_up": "Sign Up",
     "profile": {

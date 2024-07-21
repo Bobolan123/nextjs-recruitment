@@ -10,17 +10,20 @@ import { FormControl, Select, SelectChangeEvent } from "@mui/material";
 import { IoIosArrowDown } from "react-icons/io";
 import Link from "next/link";
 import React, { useState } from "react";
+import JobItems from "./left-items/job-items";
+import CompanyItems from "./left-items/company-items";
 
 interface INavbarLeftProps {
     pages: string[];
+    jobItems: string[];
+    companyItems: string[];
 }
-
+const jobs = ["java", "php", "python"];
 const NavbarLeft = (props: INavbarLeftProps) => {
-    const pages = props.pages;
+    const { pages, jobItems, companyItems } = props;
 
     const [age, setAge] = React.useState("");
-    const [openCompanyMenu, setOpenCompanyMenu] = useState(false)
-    const [openJobMenu, setOpenJobMenu] = useState(false)
+
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
     };
@@ -36,15 +39,7 @@ const NavbarLeft = (props: INavbarLeftProps) => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-    const handleCloseHover = (label:string) => {
-        label===pages[0]?setOpenJobMenu(false):null
-        label===pages[0]?setOpenCompanyMenu(false):null
-      };
-    
-      const handleOpenHover = (label:string) => {
-        label===pages[0]?setOpenJobMenu(true):null
-        label===pages[0]?setOpenCompanyMenu(true):null
-      };
+
     return (
         <>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -143,6 +138,15 @@ const NavbarLeft = (props: INavbarLeftProps) => {
                                             color: "#a6a6a6",
                                         },
                                     },
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    transformOrigin: {
+                                        vertical: "top",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
                                     sx: {
                                         "&& .Mui-selected": {
                                             backgroundColor: "#121212",
@@ -169,16 +173,17 @@ const NavbarLeft = (props: INavbarLeftProps) => {
                                     },
                             }}
                             labelId="demo-simple-select-label"
-                            label={page} 
+                            label={page}
                             displayEmpty
                             notched={true}
                             value={age}
-                            
                             onChange={handleChange}
                             renderValue={(selected) => {
                                 if (selected === age) {
                                     return (
-                                        <p className="text-gray-400 text-lg flex justify-center items-center">
+                                        <p
+                                            className={`text-gray-400 text-lg flex justify-center items-center`}
+                                        >
                                             {page} <IoIosArrowDown />
                                         </p>
                                     );
@@ -191,11 +196,20 @@ const NavbarLeft = (props: INavbarLeftProps) => {
                                 );
                             }}
                         >
-                            <MenuItem value={age} selected>
-                                Cleaadfr
-                            </MenuItem>
-                            <MenuItem value={age}>Clear</MenuItem>
-                            <MenuItem value={age}>Clear</MenuItem>
+                            {(() => {
+                                switch (page) {
+                                    case pages[0]:
+                                        return <JobItems jobItems={jobItems} />;
+                                    case pages[1]:
+                                        return (
+                                            <CompanyItems
+                                                companyItems={companyItems}
+                                            />
+                                        );
+                                    default:
+                                        return null;
+                                }
+                            })()}
                         </Select>
                     </FormControl>
                 ))}
