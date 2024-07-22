@@ -23,7 +23,6 @@ export default async function NavbarServer(props: INavbarServerProps) {
     const pages = [t("jobs"), t("companies")];
     const jobTitles= [t("job_by_skill"),t("job_by_title"),t("job_by_company"),t("job_by_city"),]
     const companyTitles = [t("best_company"), t("company_review")]
-    
     return (
         <>
             <AppBar 

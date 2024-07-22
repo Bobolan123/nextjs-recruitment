@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -10,28 +10,39 @@ import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 interface INavbarRightProps {
-    settings: string[],
-    signIn: string,
-    signUp:string
+    settings: string[];
+    signIn: string;
+    signUp: string;
 }
+
+const iconProfile = [
+    <PermIdentityIcon />,
+    <WorkOutlineIcon />,
+    <DraftsIcon />,
+    <MailOutlineIcon />,
+    <SettingsIcon />,
+    <LogoutIcon />,
+];
 const NavbarRight = (props: INavbarRightProps) => {
-    const {settings, signIn,signUp} = props
+    const { settings, signIn, signUp } = props;
     const pathname = usePathname();
     const params = useParams<{ lng: string }>();
 
     const router = useRouter();
 
-    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(
-        null
-    );
+    const [showProfile, setShowProfile] = useState(false);
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-   
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
-
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -49,7 +60,7 @@ const NavbarRight = (props: INavbarRightProps) => {
         <>
             <Box sx={{ flexGrow: 0 }}>
                 <div className="flex space-x-8">
-                    {!pathname.includes("sign_in") ? (
+                    {!showProfile ? (
                         <Link
                             href="sign_in"
                             className="text-white text-base flex justify-center items-center"
@@ -89,17 +100,34 @@ const NavbarRight = (props: INavbarRightProps) => {
                             VI
                         </button>
                     </p>
-                    <Tooltip title="Open settings">
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <p className="text-white text-lg flex justify-center items-center">
-                                Profile
-                            </p>
-                        </IconButton>
-                    </Tooltip>
+                    {showProfile ? (
+                        <Tooltip title="Open settings">
+                            <IconButton
+                                onClick={handleOpenUserMenu}
+                                sx={{ p: 0 }}
+                            >
+                                <p className="text-white text-lg flex justify-center items-center">
+                                    Profile
+                                </p>
+                            </IconButton>
+                        </Tooltip>
+                    ) : null}
                 </div>
 
+                {/* Menu of Profile */}
                 <Menu
-                    sx={{ mt: "45px" }}
+                    sx={{
+                        mt: "45px",
+                        "& .MuiMenu-paper": {
+                            backgroundColor: "#121212",
+                            color: "#a6a6a6",
+                        },
+                        "& .MuiMenuItem-root:hover": {
+                            backgroundColor: "#a6a6a6",
+                            color: "white",
+                        },
+                    }}
+                    MenuListProps={{ sx: { py: 0 } }}
                     id="menu-appbar"
                     anchorEl={anchorElUser}
                     anchorOrigin={{
@@ -114,10 +142,10 @@ const NavbarRight = (props: INavbarRightProps) => {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                 >
-                    {settings.map((setting) => (
+                    {settings.map((setting, index) => (
                         <MenuItem key={setting} onClick={handleCloseUserMenu}>
                             <Typography textAlign="center">
-                                {setting}
+                                {iconProfile[index]} {setting}
                             </Typography>
                         </MenuItem>
                     ))}

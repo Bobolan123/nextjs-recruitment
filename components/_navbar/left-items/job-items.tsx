@@ -12,6 +12,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import React, { useState, MouseEvent } from "react";
+import Link from "next/link";
+import { handleFormatLink } from "@/utils/utils";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -51,7 +53,14 @@ interface IJobItemsProps {
     // jobItems: string[];
 }
 
-const jobItems = ["java", "php", "python", "nodejs", "javascript"];
+const jobItems = [
+    "java",
+    "php",
+    "python",
+    "nodejs",
+    "javascript",
+    "Project Manager",
+];
 const JobItems = (props: IJobItemsProps) => {
     const { jobTitles } = props;
     const [value, setValue] = useState(0);
@@ -103,20 +112,24 @@ const JobItems = (props: IJobItemsProps) => {
                 <TabPanel value={value} index={0}>
                     {jobItems.map((jobItem, index) => {
                         return (
-                            <Button
-                                id={`${jobItem}`}
-                                sx={{
-                                    height: 50,
-                                    justifyContent: "flex-start",
-                                    color: "#a6a6a6",
-                                    ":hover": {
-                                        bgcolor: "primary.main", // 
-                                        color: "white",
-                                    },
-                                }}
-                            >
-                                {jobItem}
-                            </Button>
+                            <Link href={`it-jobs/${handleFormatLink(jobItem)}`}>
+                                <Button
+                                    fullWidth
+                                    id={`${jobItem}`}
+                                    sx={{
+                                        height: 50,
+                                        justifyContent: "flex-start",
+                                        color: "#a6a6a6",
+                                        ":hover": {
+                                            bgcolor: "primary.main", //
+                                            color: "white",
+                                        },
+                                        textTransform: "none",
+                                    }}
+                                >
+                                    {jobItem}
+                                </Button>
+                            </Link>
                         );
                     })}
                 </TabPanel>
