@@ -12,11 +12,7 @@ export default async function Home({
 
     return (
         <div>
-            <h1>Hi there!</h1>
-            <Link href={`/${lng}/company`}>{t("title")}</Link>
-            <Link href="/" locale="vi">
-                To vi
-            </Link>
+            home
         </div>
     );
 }

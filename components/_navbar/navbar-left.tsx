@@ -13,14 +13,14 @@ import React, { useState } from "react";
 import JobItems from "./left-items/job-items";
 import CompanyItems from "./left-items/company-items";
 
+
 interface INavbarLeftProps {
     pages: string[];
-    jobItems: string[];
-    companyItems: string[];
+    jobTitles: string[];
+    companyTitles: string[];
 }
-const jobs = ["java", "php", "python"];
 const NavbarLeft = (props: INavbarLeftProps) => {
-    const { pages, jobItems, companyItems } = props;
+    const { pages, jobTitles, companyTitles } = props;
 
     const [age, setAge] = React.useState("");
 
@@ -199,11 +199,11 @@ const NavbarLeft = (props: INavbarLeftProps) => {
                             {(() => {
                                 switch (page) {
                                     case pages[0]:
-                                        return <JobItems jobItems={jobItems} />;
+                                        return <JobItems jobTitles={jobTitles} />;
                                     case pages[1]:
                                         return (
                                             <CompanyItems
-                                                companyItems={companyItems}
+                                                companyTitles={companyTitles}
                                             />
                                         );
                                     default:
