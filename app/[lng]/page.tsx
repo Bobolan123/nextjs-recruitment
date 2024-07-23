@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n";
 

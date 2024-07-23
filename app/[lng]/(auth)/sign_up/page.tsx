@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-export default function Company({ params }: { params: { lng: string } }) {
+export default function SignUp({ params }: { params: { lng: string } }) {
   const { lng } = params;
   return (
     <div>
       <Link href={`/${lng}`}>
-        Company page
+        SignUp page
       </Link>
     </div>
   );
