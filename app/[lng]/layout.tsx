@@ -9,6 +9,7 @@ import { ThemeProvider } from "@mui/material";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Navbar from "@/components/_navbar/navbar-server";
+import GuestFooter from "@/components/_footer/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,8 +38,9 @@ export default function RootLayout({
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
                         <AntdRegistry>
-                            <Navbar lng ={lng}/>
+                            <Navbar lng={lng} />
                             {children}
+                            {/* <GuestFooter lng={lng} /> */}
                         </AntdRegistry>
                     </ThemeProvider>
                 </AppRouterCacheProvider>

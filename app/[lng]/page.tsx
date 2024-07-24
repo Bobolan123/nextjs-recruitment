@@ -8,9 +8,5 @@ export default async function Home({
 }) {
     const { t } = await useTranslation(lng);
 
-    return (
-        <div>
-            home
-        </div>
-    );
+    return <div>home</div>;
 }
