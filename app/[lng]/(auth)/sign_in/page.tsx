@@ -59,7 +59,7 @@ export default async function SignIn({
                                 variant="outlined"
                                 color="anger"
                                 sx={{
-                                    padding: "18px 36px",
+                                    padding: "10px 20px",
                                     color: "red",
                                 }}
                             >
@@ -80,6 +80,8 @@ export default async function SignIn({
                             handleSubmit={handleSubmit}
                             lngObj={lngObj}
                         />
+
+                        
                     </div>
 
                     <div className="right">
