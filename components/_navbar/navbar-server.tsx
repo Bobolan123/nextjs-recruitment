@@ -27,7 +27,7 @@ export default async function NavbarServer(props: INavbarServerProps) {
         <>
             <AppBar 
                 position="sticky"
-                className="bg-custom-gradient"
+                className="bg-custom-gradient "
                 sx={{
                     height: 88.8,
                     display: "flex",
