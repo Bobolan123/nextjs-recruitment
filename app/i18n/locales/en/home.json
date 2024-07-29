@@ -1,4 +1,10 @@
 {
-    "title": "Hi there!",
-    "to-second-page": "To second page"
+    "title": "IT Jobs For Developers!",
+    "enter_keyword": "Enter keyword skill (Java, IOS...), job title, company...",
+    "suggest_for_you": "Suggestions for you:",
+    "search": "Search",
+    "top_employer": "Top Employers",
+    "it_jobs": "IT Jobs For Developers",
+    "top_employers": "Top Employers",
+    "jobs": "jobs"
 }

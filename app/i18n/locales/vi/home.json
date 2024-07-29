@@ -1,4 +1,10 @@
 {
-    "title": "Chào!",
-    "to-second-page": "home"
-  }
+    "title": "Công việc CNTT dành cho Developers!",
+    "enter_keyword": "Nhập từ khóa kỹ năng (Java, IOS...), công việc, công ty...",
+    "suggest_for_you": "Gợi ý dành cho bạn:",
+    "search": "Tìm kiếm",
+    "top_employer": "Các Nhà tuyển dụng Hàng đầu",
+    "it_jobs": "Công việc CNTT dành cho Developers",
+    "top_employers": "Nhà tuyển dụng hàng đầu",
+    "jobs": "việc làm"
+}

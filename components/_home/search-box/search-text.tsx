@@ -3,16 +3,26 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
+import SearchIcon from '@mui/icons-material/Search';
+
 const top100Films = [
     { label: "The Shawshank Redemption", year: 1994 },
     { label: "The Godfather", year: 1972 },
     { label: "The Godfather: Part II", year: 1974 },
 ];
 
-const SearchText = (props: any) => {
+interface ISearchTextProps {
+    t: {
+    enter_keyword:string,
+    search:string
+    }
+}
+const SearchText = (props: ISearchTextProps) => {
+    const {t} = props
+
     return (
         <>
-            <div className="flex ">
+            <div className="flex space-x-3">
                 <Autocomplete
                     className="flex-auto"
                     disablePortal
@@ -28,7 +38,7 @@ const SearchText = (props: any) => {
                         },
                     }}
                     renderInput={(params) => (
-                        <TextField {...params} label="" placeholder="Search" />
+                        <TextField {...params} label="" placeholder={t.enter_keyword} />
                     )}
                 />
                 <Button
@@ -40,7 +50,7 @@ const SearchText = (props: any) => {
                         paddingRight: 10,
                     }}
                 >
-                    Search
+                    <SearchIcon/> {t.search}
                 </Button>
             </div>
         </>
