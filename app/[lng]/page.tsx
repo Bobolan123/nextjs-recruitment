@@ -4,6 +4,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import LocationSelect from "@/components/_home/search-box/location-select";
 import SearchText from "@/components/_home/search-box/search-text";
 import CompanyItem from "@/components/_home/company-section/companyItem";
+import JobItem from "@/components/_home/job-section/jobItem";
 
 export default async function Home({
     params: { lng },
@@ -18,6 +19,14 @@ export default async function Home({
     const tCompanyItem = {
         jobs: t("jobs"),
     };
+    const tJobItem = {
+        posted: t('posted'),
+        hour_ago: t('hour_ago'),
+        hour_agos: t('hour_agos'),
+        sign_in_to_view: t('sign_in_to_view'),
+        at_office: t('at_office')
+    };
+    
 
     return (
         <div className="flex flex-col  space-y-20">
@@ -67,7 +76,7 @@ export default async function Home({
             <div className="company-section">
                 <Container sx={{ maxWidth: "92%" }} maxWidth={false}>
                     <Typography className="text-center" variant="h4">
-                        <b>{t('top_employers')}</b>
+                        <b>{t("top_employers")}</b>
                     </Typography>
                     <Grid
                         container
@@ -76,6 +85,22 @@ export default async function Home({
                         justifyContent="center"
                     >
                         <CompanyItem tCompanyItem={tCompanyItem} />
+                    </Grid>
+                </Container>
+            </div>
+
+            <div className="job-section">
+                <Container sx={{ maxWidth: "92%" }} maxWidth={false}>
+                    <Typography className="text-center" variant="h4">
+                        <b>{t("top_employers")}</b>
+                    </Typography>
+                    <Grid
+                        container
+                        spacing={{ xs: 2, md: 3 }}
+                        columns={{ xs: 4, sm: 8, md: 12 }}
+                        justifyContent="center"
+                    >
+                        <JobItem tJobItem={tJobItem}/>
                     </Grid>
                 </Container>
             </div>
