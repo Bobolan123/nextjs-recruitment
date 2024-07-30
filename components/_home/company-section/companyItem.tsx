@@ -21,10 +21,10 @@ const CompanyItem = (props: ICompanyItemProps) => {
     const { tCompanyItem } = props;
     return (
         <>
-            <Grid item key="123" xs={2} sm={4} md={4}>
+            <Grid item key="123" xs={12} sm={6} md={4}>
                 <Card
                     sx={{
-                        width: 426,
+                        minWidth:250,
                         height: "100%",
                         display: "flex",
                         flexDirection: "column",

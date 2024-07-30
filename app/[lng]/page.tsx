@@ -30,7 +30,7 @@ export default async function Home({
 
     return (
         <div className="flex flex-col  space-y-20">
-            <div className="bg-custom-gradient text-white ">
+            <div className="bg-custom-gradient text-white " >
                 <Box
                     sx={{
                         display: "flex",
@@ -74,14 +74,14 @@ export default async function Home({
                 </Box>
             </div>
             <div className="company-section">
-                <Container sx={{ maxWidth: "92%" }} maxWidth={false}>
+                <Container >
                     <Typography className="text-center" variant="h4">
                         <b>{t("top_employers")}</b>
                     </Typography>
                     <Grid
                         container
                         spacing={{ xs: 2, md: 3 }}
-                        columns={{ xs: 4, sm: 8, md: 12 }}
+                        columns={{ xs: 4, sm: 12, md: 12 }}
                         justifyContent="center"
                     >
                         <CompanyItem tCompanyItem={tCompanyItem} />
@@ -97,7 +97,7 @@ export default async function Home({
                     <Grid
                         container
                         spacing={{ xs: 2, md: 3 }}
-                        columns={{ xs: 4, sm: 8, md: 12 }}
+                        columns={{ xs: 4, sm: 12, md: 12 }}
                         justifyContent="center"
                     >
                         <JobItem tJobItem={tJobItem}/>

@@ -27,10 +27,10 @@ const JobItem = (props: IJobItemProps) => {
     const { tJobItem } = props;
     return (
         <>
-            <Grid item key="123" xs={2} sm={4} md={3}>
+            <Grid item key="123"  xs={6} sm={4} md={3}>
                 <Card
                     sx={{
-                        width: 426,
+                        minWidth: 150,
                         height: "100%",
                         display: "flex",
                         flexDirection: "column",
