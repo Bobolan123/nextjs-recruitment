@@ -39,4 +39,14 @@ const TagHot = () => {
     );
 };
 
-export { TagHot, TagNewForYou, TagSuperHot };
+const TagCompanySpotLight = () => {
+    return (
+        <div className="absolute rounded-r bg-yellow-500 text-white font-semibold text-sm py-1 px-3 left-0 top-2 z-50">
+            Company Spotlight
+            <div className="absolute top-full left-0 border-b-8 border-transparent border-l-8 border-l-yellow-500 z-50"></div>
+
+
+        </div>
+    );
+};
+export { TagHot, TagNewForYou, TagSuperHot, TagCompanySpotLight };

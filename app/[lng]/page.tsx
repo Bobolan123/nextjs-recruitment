@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import LocationSelect from "@/components/_home/search-box/location-select";
 import SearchText from "@/components/_home/search-box/search-text";
 import CompanyItem from "@/components/_home/company-section/companyItem";
@@ -20,17 +20,16 @@ export default async function Home({
         jobs: t("jobs"),
     };
     const tJobItem = {
-        posted: t('posted'),
-        hour_ago: t('hour_ago'),
-        hour_agos: t('hour_agos'),
-        sign_in_to_view: t('sign_in_to_view'),
-        at_office: t('at_office')
+        posted: t("posted"),
+        hour_ago: t("hour_ago"),
+        hour_agos: t("hour_agos"),
+        sign_in_to_view: t("sign_in_to_view"),
+        at_office: t("at_office"),
     };
-    
 
     return (
         <div className="flex flex-col  space-y-20">
-            <div className="bg-custom-gradient text-white " >
+            <div className="bg-custom-gradient text-white ">
                 <Box
                     sx={{
                         display: "flex",
@@ -74,7 +73,7 @@ export default async function Home({
                 </Box>
             </div>
             <div className="company-section">
-                <Container >
+                <Container>
                     <Typography className="text-center" variant="h4">
                         <b>{t("top_employers")}</b>
                     </Typography>
@@ -100,9 +99,23 @@ export default async function Home({
                         columns={{ xs: 4, sm: 12, md: 12 }}
                         justifyContent="center"
                     >
-                        <JobItem tJobItem={tJobItem}/>
+                        <JobItem tJobItem={tJobItem} />
                     </Grid>
                 </Container>
+                <Box textAlign="center">
+                    <Button
+                        variant="outlined"
+                        color="anger"
+                        sx={{
+                            padding: "10px 15px",
+                            marginTop:5,
+                        }}
+                    >
+                        <span>
+                            {t("view_more")} 12 {t("jobs")}
+                        </span>
+                    </Button>
+                </Box>
             </div>
         </div>
     );

@@ -12,7 +12,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import { t } from "i18next";
-import { TagHot, TagSuperHot } from "@/components/common/tagJob";
+import { TagHot, TagSuperHot } from "@/components/common/tags";
 
 interface IJobItemProps {
     tJobItem: {
@@ -27,7 +27,7 @@ const JobItem = (props: IJobItemProps) => {
     const { tJobItem } = props;
     return (
         <>
-            <Grid item key="123"  xs={6} sm={4} md={3}>
+            <Grid item key="123" xs={6} sm={4} md={3}>
                 <Card
                     sx={{
                         minWidth: 150,
@@ -38,7 +38,7 @@ const JobItem = (props: IJobItemProps) => {
                 >
                     <CardActionArea className="static">
                         <div className="absolute right-0 top-4">
-                            <TagHot/>
+                            <TagHot />
                         </div>
                         <Link href={`/company/`}>
                             <CardMedia component="div" sx={{}}></CardMedia>
@@ -89,7 +89,8 @@ const JobItem = (props: IJobItemProps) => {
                                     <ApartmentIcon /> {tJobItem.at_office}
                                 </Typography>
                                 <Typography variant="subtitle1" color={""}>
-                                    <FmdGoodIcon /> HCM
+                                    <FmdGoodIcon style={{ color: "gray" }} />{" "}
+                                    HCM
                                 </Typography>
                                 <div className="flex space-x-2">
                                     <Typography
