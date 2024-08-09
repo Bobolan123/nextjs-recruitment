@@ -10,6 +10,7 @@ import { TagCompanySpotLight } from "@/components/common/tags";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import { blue } from "@mui/material/colors";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 export default async function ItJobs({
     params,
@@ -25,7 +26,7 @@ export default async function ItJobs({
 
     return (
         <div>
-            <div className="bg-custom-gradient text-white">
+            <div className="bg-custom-gradient text-white ">
                 <Box
                     sx={{
                         display: "flex",
@@ -48,10 +49,10 @@ export default async function ItJobs({
                 </Box>
             </div>
 
-            <div className="company-spotlight">
+            <div className="company-spotlight hidden md:block h-48 bg-gray-100">
                 <Stack
                     alignItems={"center"}
-                    className="bg-white d-flex flex-column flex-lg-row h-16"
+                    className="d-flex flex-column flex-lg-row h-16"
                 >
                     <Container
                         disableGutters
@@ -70,7 +71,7 @@ export default async function ItJobs({
                         <div className="flex">
                             <TagCompanySpotLight />
 
-                            <Link href="">
+                            <Link href="companies">
                                 <Image
                                     src={robot}
                                     alt=""
@@ -79,14 +80,17 @@ export default async function ItJobs({
                                 ></Image>
                             </Link>
                             <div className="absolute left-56 top-10 ">
-                                <Image
-                                    src={robot}
-                                    alt=""
-                                    width={120}
-                                    height={120}
-                                ></Image>
+                                <Link href={`companies/`}>
+                                    <Image
+                                        src={robot}
+                                        alt=""
+                                        width={120}
+                                        height={120}
+                                    ></Image>
+                                </Link>
                             </div>
-                            <div className="ml-14 flex justify-center items-center">
+
+                            <div className="ml-14 flex justify-center items-center w-5/12 border-r-2 border-gray-200 border-dashed">
                                 <div>
                                     <Typography variant="h6">
                                         <Link href="">Company name</Link>
@@ -101,7 +105,8 @@ export default async function ItJobs({
                                         variant="overline"
                                         fontSize={15}
                                     >
-                                        Give people power
+                                        Give people power Give people power Give
+                                        people power Give people power
                                     </Typography>
                                     <Typography
                                         variant="subtitle1"
@@ -117,10 +122,31 @@ export default async function ItJobs({
                                     </Typography>
                                 </div>
                             </div>
+                            <div className="pl-2 pr-3 flex flex-col gap-3 justify-center items-center">
+                                <Link href={"it-jobs"}>
+                                    <Typography variant="subtitle1">
+                                        <ArrowCircleRightOutlinedIcon
+                                            color="warning"
+                                            className="mr-2"
+                                        />
+                                        adsfasdf
+                                    </Typography>
+                                </Link>
+
+                                <Typography variant="subtitle1">
+                                    <ArrowCircleRightOutlinedIcon
+                                        color="warning"
+                                        className="mr-2"
+                                    />
+                                    adsfasdf
+                                </Typography>
+                            </div>
                         </div>
                     </Container>
                 </Stack>
             </div>
+
+                        
         </div>
     );
 }
