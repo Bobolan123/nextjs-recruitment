@@ -39,7 +39,7 @@ const JobItem = (props: IJobItemProps) => {
                     <CardActionArea className="static">
                         <div className="absolute right-0 top-4">
                             <TagHot />
-                        </div>
+                        </div> 
                         <Link href={`/company/`}>
                             <CardMedia component="div" sx={{}}></CardMedia>
 

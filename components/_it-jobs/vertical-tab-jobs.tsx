@@ -10,7 +10,8 @@ import Image from "next/image";
 import robot from "@/public/logo/robot.png";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
+import { TagHot } from "../common/tags";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -72,16 +73,24 @@ export default function VerticalTabJobs() {
                 onChange={handleChange}
                 aria-label="Vertical tabs example"
                 sx={{
-                    borderLeft: 1,
-                    borderColor: "divider",
                     bgcolor: "white",
                     width: "41%",
                     gap: 10,
                     "& .Mui-selected": {
                         maxWidth: "100%",
+                        border: 1,
+                        borderRadius: 2,
+                        borderColor: "red",
                     },
                     "&& .MuiTab-root": {
                         alignItems: "baseline",
+                    },
+                    "& .MuiTabs-indicator": {
+                        bgcolor: "red",
+                        left: 0,
+                        width: 6,
+                        borderTopRightRadius: 8,
+                        borderBottomRightRadius: 8,
                     },
                 }}
             >
@@ -89,7 +98,10 @@ export default function VerticalTabJobs() {
                     className=""
                     label={
                         <React.Fragment>
-                            <div className="text-left">
+                            <div className="text-left ">
+                                <div className="absolute right-0 top-4">
+                                    <TagHot />
+                                </div>
                                 <Typography
                                     variant="subtitle2"
                                     color="textDarkGray"
@@ -123,7 +135,6 @@ export default function VerticalTabJobs() {
                                         <span>Company name</span>
                                     </Typography>
                                 </Link>
-
                                 <div className="mt-3 mb-1 pb-3 border-b-2 border-gray-200 border-dashed">
                                     <Typography variant="subtitle1">
                                         <PaidOutlinedIcon className="mr-1" />
@@ -131,7 +142,6 @@ export default function VerticalTabJobs() {
                                         <u>Sign in to view salary</u>
                                     </Typography>
                                 </div>
-
                                 <Typography variant="subtitle1">
                                     <ApartmentIcon
                                         sx={{ color: "textDarkGray" }}
@@ -151,13 +161,12 @@ export default function VerticalTabJobs() {
                                             color: "#414042",
                                             borderRadius: 100,
                                             padding: "1px 8px",
-                                            border:1,
-                                            borderColor:"textDarkGray"
+                                            border: 1,
+                                            borderColor: "textDarkGray",
                                         }}
                                     >
                                         Java
                                     </Typography>
-                                   
                                 </div>
                             </div>
                         </React.Fragment>
@@ -167,6 +176,7 @@ export default function VerticalTabJobs() {
                 <Tab label="Item Two" {...a11yProps(1)} />
                 <Tab label="Item Three" {...a11yProps(2)} />
             </Tabs>
+
             <TabPanel value={value} index={0}>
                 Item One
             </TabPanel>
