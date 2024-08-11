@@ -1,5 +1,6 @@
 "use client";
-import { Roboto } from "next/font/google";
+
+import { Roboto, Lexend } from "next/font/google";
 import { createTheme, PaletteColorOptions } from "@mui/material/styles";
 
 const roboto = Roboto({
@@ -8,12 +9,16 @@ const roboto = Roboto({
     display: "swap",
 });
 
+const lexend = Lexend({
+    weight: ["300", "400", "500", "700"],
+    subsets: ["latin"],
+    display: "swap",
+});
+
 declare module "@mui/material/styles" {
     interface CustomPalette {
         anger: PaletteColorOptions;
-        apple: PaletteColorOptions;
-        steelBlue: PaletteColorOptions;
-        violet: PaletteColorOptions;
+        textDarkGray: string;
     }
     interface Palette extends CustomPalette {}
     interface PaletteOptions extends CustomPalette {}
@@ -22,9 +27,7 @@ declare module "@mui/material/styles" {
 declare module "@mui/material/Button" {
     interface ButtonPropsColorOverrides {
         anger: true;
-        apple: true;
-        steelBlue: true;
-        violet: true;
+        textDarkGray: true;
     }
 }
 const { palette } = createTheme();
@@ -33,13 +36,18 @@ const createColor = (mainColor: any) =>
     augmentColor({ color: { main: mainColor } });
 const theme = createTheme({
     typography: {
-        fontFamily: roboto.style.fontFamily,
+        fontFamily: lexend.style.fontFamily,
+        button: {
+            textTransform: "none", // unstyle button text
+        },
+        allVariants: {
+            color: "black",
+        },
+        
     },
     palette: {
-        anger: createColor("#ed1b2f"),
-        apple: createColor("#5DBA40"),
-        steelBlue: createColor("#5C76B7"),
-        violet: createColor("#BC00A3"),
+        anger: createColor("#ed1b2f"), //button color
+        textDarkGray: "#a6a6a6", //text color
     },
 });
 

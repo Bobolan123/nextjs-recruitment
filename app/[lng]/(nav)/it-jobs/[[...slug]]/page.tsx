@@ -11,6 +11,7 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import { blue } from "@mui/material/colors";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import VerticalTabJobs from "@/components/_it-jobs/vertical-tab-jobs";
 
 export default async function ItJobs({
     params,
@@ -49,7 +50,7 @@ export default async function ItJobs({
                 </Box>
             </div>
 
-            <div className="company-spotlight hidden md:block h-48 bg-gray-100">
+            <div className="company-spotlight hidden md:block h-40 bg-gray-100">
                 <Stack
                     alignItems={"center"}
                     className="d-flex flex-column flex-lg-row h-16"
@@ -98,7 +99,7 @@ export default async function ItJobs({
                                     <Typography variant="subtitle1">
                                         <FmdGoodIcon
                                             style={{ color: "gray" }}
-                                        />{" "}
+                                        />
                                         HCM
                                     </Typography>
                                     <Typography
@@ -146,7 +147,18 @@ export default async function ItJobs({
                 </Stack>
             </div>
 
-                        
+            <div className="pl-16 pr-16 bg-gray-100">
+                <Typography
+                    variant="h4"
+                    sx={{ fontWeight: "bold", mb: "20px" }}
+                >
+                    4 <span className="text-red-500">typescript</span> jobs in
+                    Da Nang
+                </Typography>
+                <Box>
+                    <VerticalTabJobs />
+                </Box>
+            </div>
         </div>
     );
 }

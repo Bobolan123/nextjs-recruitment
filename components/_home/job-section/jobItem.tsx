@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import { t } from "i18next";
 import { TagHot, TagSuperHot } from "@/components/common/tags";
 
@@ -86,16 +86,20 @@ const JobItem = (props: IJobItemProps) => {
                                 </div>
                                 <hr className="mt-2 mb-3"></hr>
                                 <Typography variant="subtitle1" color={""}>
-                                    <ApartmentIcon /> {tJobItem.at_office}
+                                    <ApartmentIcon
+                                        sx={{ color: "textDarkGray" }}
+                                    />{" "}
+                                    {tJobItem.at_office}
                                 </Typography>
                                 <Typography variant="subtitle1" color={""}>
-                                    <FmdGoodIcon style={{ color: "gray" }} />{" "}
+                                    <FmdGoodOutlinedIcon
+                                        sx={{ color: "textDarkGray" }}
+                                    />
                                     HCM
                                 </Typography>
                                 <div className="flex space-x-2">
                                     <Typography
                                         variant="subtitle1"
-                                        color={"gainsboro"}
                                         sx={{
                                             color: "#414042",
                                             backgroundColor: "#f7f7f7",
@@ -107,7 +111,6 @@ const JobItem = (props: IJobItemProps) => {
                                     </Typography>
                                     <Typography
                                         variant="subtitle1"
-                                        color={"gainsboro"}
                                         sx={{
                                             color: "#414042",
                                             backgroundColor: "#f7f7f7",
