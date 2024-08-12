@@ -49,6 +49,7 @@ const theme = createTheme({
         anger: createColor("#ed1b2f"), //button color
         textDarkGray: "#a6a6a6", //text color
     },
+  
 });
 
 export default theme;
