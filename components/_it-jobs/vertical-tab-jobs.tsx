@@ -12,7 +12,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import { TagHot } from "../common/tags";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
@@ -28,6 +28,7 @@ function TabPanel(props: TabPanelProps) {
     return (
         <Box
             sx={{
+                position: "relative",
                 width: "59%",
                 padding: "15px 20px",
                 borderRadius: 2,
@@ -39,7 +40,17 @@ function TabPanel(props: TabPanelProps) {
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ bgcolor: "white" }}>{children}</Box>}
+            {value === index && (
+                <Box
+                    sx={{
+                        bgcolor: "white",
+                        position: "sticky",
+                        top: "100px",
+                    }}
+                >
+                    {children}
+                </Box>
+            )}
         </Box>
     );
 }
@@ -52,6 +63,8 @@ function a11yProps(index: number) {
 }
 
 export default function VerticalTabJobs() {
+    const isSmallScreen = useMediaQuery("(max-width:950px)");
+
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -65,17 +78,18 @@ export default function VerticalTabJobs() {
                 bgcolor: "#f7f7f7",
                 display: "flex",
                 gap: 5,
+                flexDirection: isSmallScreen ? "column" : "row", // Stack on small screens
             }}
         >
             <Tabs
-                orientation="vertical"
+                orientation= "vertical" // Switch orientation based on screen size
                 variant="scrollable"
                 value={value}
                 onChange={handleChange}
                 aria-label="Vertical tabs example"
                 sx={{
                     bgcolor: "white",
-                    width: "41%",
+                    width: isSmallScreen ? "100%" : "41%", // 100% width on small screens
                     gap: 10,
                     "& .Mui-selected": {
                         maxWidth: "100%",
@@ -178,180 +192,185 @@ export default function VerticalTabJobs() {
                 <Tab label="Item Three" {...a11yProps(2)} />
             </Tabs>
 
-            <TabPanel value={value} index={0}>
-                <div className="flex items-center">
-                    <Image
-                        src={robot}
-                        alt="robot"
-                        width={100}
-                        height={100}
-                    ></Image>
-                    <div className="flex flex-col gap-3">
+            {!isSmallScreen && (
+                <>
+                    <TabPanel value={value} index={0}>
+                        <div className="flex items-center">
+                            <Image
+                                src={robot}
+                                alt="robot"
+                                width={100}
+                                height={100}
+                            ></Image>
+                            <div className="flex flex-col gap-3">
+                                <Box
+                                    sx={{
+                                        fontWeight: "bold",
+                                        fontSize: 22,
+                                        maxWidth: 300,
+                                    }}
+                                >
+                                    Fulltime Remote Frontend
+                                    Javascript/Typescript/ReactJS
+                                </Box>
+                                <Typography variant="subtitle1">
+                                    Company name
+                                </Typography>
+                                <Typography variant="subtitle1">
+                                    <PaidOutlinedIcon className="mr-1" />
+                                    <u>Sign in to view salary</u>
+                                </Typography>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-3 items-center mt-3 mb-4">
+                            <Button
+                                color="anger"
+                                variant="contained"
+                                sx={{ flexGrow: 1, minWidth: 140 }}
+                            >
+                                Apply now
+                            </Button>
+                            <FavoriteBorderIcon
+                                sx={{ color: "red", fontSize: 35 }}
+                            />
+                        </div>
+                        <hr className="mb-5" />
                         <Box
+                            component="div"
                             sx={{
-                                fontWeight: "bold",
-                                fontSize: 22,
-                                maxWidth: 300,
+                                display: "flex",
+                                flexDirection: "column",
+                                height: "calc(100vh - 300px)",
+                                overflow: "hidden",
+                                overflowY: "scroll",
+                                scrollbarWidth: "thin",
                             }}
                         >
-                            Fulltime Remote Frontend
-                            Javascript/Typescript/ReactJS
-                        </Box>
-                        <Typography variant="subtitle1">
-                            Company name
-                        </Typography>
-                        <Typography variant="subtitle1">
-                            <PaidOutlinedIcon className="mr-1" />
-
-                            <u>Sign in to view salary</u>
-                        </Typography>
-                    </div>
-                </div>
-
-                <div className="flex gap-3 items-center mt-3 mb-4">
-                    <Button
-                        color="anger"
-                        variant="contained"
-                        sx={{ flexGrow: 1, minWidth: 140 }}
-                    >
-                        Apply now
-                    </Button>
-                    <FavoriteBorderIcon sx={{ color: "red", fontSize: 35 }} />
-                </div>
-                <hr className="mb-5" />
-                <Box
-                    component="div"
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "calc(100vh - 300px)",
-                        overflow: "hidden",
-                        overflowY: "scroll",
-                        scrollbarWidth: 'thin',
-
-                    }}
-                >
-                    <section className="preview-job-overview pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
-                        <div className="flex flex-col gap-3">
-                            <Typography variant="subtitle2" color={""}>
-                                <FmdGoodOutlinedIcon
-                                    sx={{ color: "textDarkGray" }}
-                                />
-                                SmartHub 18/2E Nguyen Cuu Van, Ward 17, Binh
-                                Thanh District, HCMC, Binh Thanh, Ho Chi Minh
-                            </Typography>
-                            <Typography variant="subtitle2" color={""}>
-                                <ApartmentIcon sx={{ color: "textDarkGray" }} />{" "}
-                                At office
-                            </Typography>
-                            <Typography variant="subtitle2" color={""}>
-                                <AccessTimeIcon
-                                    sx={{ color: "textDarkGray" }}
-                                />{" "}
-                                2 days ago
-                            </Typography>
-                            <Typography
-                                variant="subtitle2"
-                                className="flex gap-3 items-center "
-                            >
-                                Skills:{" "}
-                                <div className="flex gap-1">
+                            <section className="preview-job-overview pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
+                                <div className="flex flex-col gap-3">
+                                    <Typography variant="subtitle2" color={""}>
+                                        <FmdGoodOutlinedIcon
+                                            sx={{ color: "textDarkGray" }}
+                                        />
+                                        SmartHub 18/2E Nguyen Cuu Van, Ward 17,
+                                        Binh Thanh District, HCMC, Binh Thanh,
+                                        Ho Chi Minh
+                                    </Typography>
+                                    <Typography variant="subtitle2" color={""}>
+                                        <ApartmentIcon
+                                            sx={{ color: "textDarkGray" }}
+                                        />{" "}
+                                        At office
+                                    </Typography>
+                                    <Typography variant="subtitle2" color={""}>
+                                        <AccessTimeIcon
+                                            sx={{ color: "textDarkGray" }}
+                                        />{" "}
+                                        2 days ago
+                                    </Typography>
                                     <Typography
                                         variant="subtitle2"
-                                        sx={{
-                                            color: "#414042",
-                                            borderRadius: 100,
-                                            padding: "1px 8px",
-                                            border: 1,
-                                            borderColor: "textDarkGray",
-                                        }}
+                                        className="flex gap-3 items-center "
                                     >
-                                        Java
+                                        Skills:{" "}
+                                        <div className="flex gap-1">
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{
+                                                    color: "#414042",
+                                                    borderRadius: 100,
+                                                    padding: "1px 8px",
+                                                    border: 1,
+                                                    borderColor: "textDarkGray",
+                                                }}
+                                            >
+                                                Java
+                                            </Typography>
+                                        </div>
                                     </Typography>
                                 </div>
-                            </Typography>
-                        </div>
-                    </section>
+                            </section>
 
-                    <section className="reason-join-us pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
-                        <Typography
-                            variant="h2"
-                            fontSize={22}
-                            fontWeight={700}
-                            mb={2}
-                        >
-                            Top 3 reasons to join us
-                        </Typography>
-                        <ul className="marker:text-red-500 list-outside list-disc ml-6 leading-8">
-                            <li>Fully Remote</li>
-                            <li>International Team</li>
-                            <li>Coaching to grow career</li>
-                        </ul>
-                    </section>
+                            <section className="reason-join-us pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
+                                <Typography
+                                    variant="h2"
+                                    fontSize={22}
+                                    fontWeight={700}
+                                    mb={2}
+                                >
+                                    Top 3 reasons to join us
+                                </Typography>
+                                <ul className="marker:text-red-500 list-outside list-disc ml-6 leading-8">
+                                    <li>Fully Remote</li>
+                                    <li>International Team</li>
+                                    <li>Coaching to grow career</li>
+                                </ul>
+                            </section>
 
-                    <section className="job-description pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
-                        <Typography
-                            variant="h2"
-                            fontSize={22}
-                            fontWeight={700}
-                            mb={2}
-                        >
-                            Job description
-                        </Typography>
-                        <Box
-                            component="div"
-                            sx={{
-                                fontSize: 16,
-                                fontWeight: 400,
-                                lineHeight: 1.8,
-                            }}
-                        >
-                            Text
+                            <section className="job-description pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
+                                <Typography
+                                    variant="h2"
+                                    fontSize={22}
+                                    fontWeight={700}
+                                    mb={2}
+                                >
+                                    Job description
+                                </Typography>
+                                <Box
+                                    component="div"
+                                    sx={{
+                                        fontSize: 16,
+                                        fontWeight: 400,
+                                        lineHeight: 1.8,
+                                    }}
+                                >
+                                    Text
+                                </Box>
+                            </section>
+
+                            <section className="skill-exp pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
+                                <Typography
+                                    variant="h2"
+                                    fontSize={22}
+                                    fontWeight={700}
+                                    mb={2}
+                                >
+                                    Your skills and experience
+                                </Typography>
+                                <Box
+                                    component="div"
+                                    sx={{
+                                        fontSize: 16,
+                                        fontWeight: 400,
+                                        lineHeight: 1.8,
+                                    }}
+                                >
+                                    text
+                                </Box>
+                            </section>
+
+                            <section className="company-overview pb-5">
+                                <Typography
+                                    variant="h2"
+                                    fontSize={22}
+                                    fontWeight={700}
+                                    mb={2}
+                                >
+                                    Company name
+                                    <a className="ml-auto">View company </a>
+                                </Typography>
+                            </section>
                         </Box>
-                    </section>
-
-                    <section className="skill-exp pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
-                        <Typography
-                            variant="h2"
-                            fontSize={22}
-                            fontWeight={700}
-                            mb={2}
-                        >
-                            Your skills and experience
-                        </Typography>
-                        <Box
-                            component="div"
-                            sx={{
-                                fontSize: 16,
-                                fontWeight: 400,
-                                lineHeight: 1.8,
-                            }}
-                        >
-                            text
-                        </Box>
-                    </section>
-
-                   
-                    <section className="company-overview pb-5">
-                        <Typography
-                            variant="h2"
-                            fontSize={22}
-                            fontWeight={700}
-                            mb={2}
-                        >
-                            Company name
-                            <a className="ml-auto">View company </a>
-                        </Typography>
-                        
-                    </section>
-                </Box>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        Item Two
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
+                        Item Three
+                    </TabPanel>
+                </>
+            )}
         </Box>
     );
 }
