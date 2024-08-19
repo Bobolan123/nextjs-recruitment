@@ -1,17 +1,16 @@
 import { useTranslation } from "@/app/i18n";
-import LocationSelect from "@/components/_home/search-box/location-select";
-import SearchText from "@/components/_home/search-box/search-text";
-import CompanySpotlight from "@/components/_it-jobs/company-spotlight";
+import LocationSelect from "@/components/common/search-box/locationSelect";
+import SearchText from "@/components/common/search-box/searchText";
+import CompanySpotlight from "@/components/_it-jobs/companySpotlight";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import robot from "@/public/logo/robot.png";
 import { TagCompanySpotLight } from "@/components/common/tags";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
-import { blue } from "@mui/material/colors";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import VerticalTabJobs from "@/components/_it-jobs/vertical-tab-jobs";
+import VerticalTabJobs from "@/components/_it-jobs/verticalTabJobs";
 
 export default async function ItJobs({
     params,
@@ -19,11 +18,34 @@ export default async function ItJobs({
     params: { lng: string; slug: string[] };
 }) {
     const { lng, slug } = params;
-    const { t } = await useTranslation(lng);
+    const { t } = await useTranslation(lng,"itJobs");
+
     const tSearchText = {
         search: t("search"),
         enter_keyword: t("enter_keyword"),
     };
+    const tJobPanel = {
+        view: t("view"),
+        jobs: t("jobs"),
+
+    }
+    const tJobTabs = {
+        view: t("view"),
+        job: t("job"),
+        jobs: t("jobs"),
+        job_in: t("job_in"),
+        posted: t("posted"),
+        day: t("day"),
+        days: t("days"),
+        ago: t("ago"),
+        sign_in_to_view_salary: t("sign_in_to_view_salary"),
+        skills: t("skills"),
+        top_3_reason_to_join_us: t("top_3_reason_to_join_us"),
+        job_description: t("job_description"),
+        your_skills_and_experience: t("your_skills_and_experience"),
+        why_working_here: t("why_working_here")
+    };
+    
 
     return (
         <div>
@@ -115,7 +137,7 @@ export default async function ItJobs({
                                         className="flex items-center"
                                     >
                                         <Link href="jobs">
-                                            View 4 jobs{" "}
+                                            {t('view')} 4 {t("jobs")}
                                             <ArrowForwardIosIcon
                                                 style={{ fontSize: 15 }}
                                             />
@@ -152,8 +174,7 @@ export default async function ItJobs({
                     variant="h4"
                     sx={{ fontWeight: "bold", mb: "20px" }}
                 >
-                    4 <span className="text-red-500">typescript</span> jobs in
-                    Da Nang
+                    4 <span className="text-red-500">typescript</span> {t("job_in")} Da Nang
                 </Typography>
                 <Box>
                     <VerticalTabJobs />

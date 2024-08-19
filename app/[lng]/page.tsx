@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import LocationSelect from "@/components/_home/search-box/location-select";
-import SearchText from "@/components/_home/search-box/search-text";
+import LocationSelect from "@/components/common/search-box/locationSelect";
+import SearchText from "@/components/common/search-box/searchText";
 import CompanyItem from "@/components/_home/company-section/companyItem";
 import JobItem from "@/components/_home/job-section/jobItem";
 
@@ -42,8 +42,8 @@ export default async function Home({
                         paddingBottom: "64px",
                     }}
                 >
-                    <Typography variant="h4" gutterBottom>
-                        <b>{t("title")}</b>
+                    <Typography variant="h4" color="white" gutterBottom>
+                        <b>{t("title")} </b>
                     </Typography>
                     <div className="md:grid md:grid-cols-12 gap-4 ">
                         <LocationSelect />
@@ -51,6 +51,7 @@ export default async function Home({
                             <SearchText t={tSearchText} />
                         </div>
                     </div>
+
 
                     <div className="flex gap-2 items-center">
                         <Typography variant="subtitle1" color={"gainsboro"}>
@@ -108,7 +109,7 @@ export default async function Home({
                         color="anger"
                         sx={{
                             padding: "10px 15px",
-                            marginTop:5,
+                            marginTop: 5,
                         }}
                     >
                         <span>

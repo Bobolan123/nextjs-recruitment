@@ -36,7 +36,9 @@ export default function RootLayout({
         <html lang={lng} dir={dir(lng)}>
             <body className={inter.className}>
                 <AppRouterCacheProvider>
-                    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                    <Navbar lng={lng} />
+                    {children}
+                    {/* <GuestFooter lng={lng} /> */}
                 </AppRouterCacheProvider>
             </body>
         </html>
