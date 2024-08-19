@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import GoogleIcon from "@mui/icons-material/Google";
 import DoneIcon from "@mui/icons-material/Done";
 import Image from "next/image";
+import { signIn } from "@/auth"
 
 export default async function SignIn({
     params: { lng },
@@ -27,22 +28,7 @@ export default async function SignIn({
         sign_up_now: t("sign_up_now"),
     };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        "use server";
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const email = data.get("email");
-        const password = data.get("password");
-
-        if (email && password) {
-            const userAcc = {
-                username: email.toString(),
-                password: password.toString(),
-            };
-        } else {
-            console.error("Email or password is missing");
-        }
-    };
+   
 
     return (
         <Container sx={{ maxWidth: 1350 }} maxWidth={false}>
@@ -77,7 +63,6 @@ export default async function SignIn({
                         <Typography typography="h6">{t("account")}:</Typography>
 
                         <SignInBox
-                            handleSubmit={handleSubmit}
                             lngObj={lngObj}
                         />
 

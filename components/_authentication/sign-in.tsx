@@ -11,9 +11,9 @@ import { useState } from "react";
 import { IconButton, InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { signIn } from "next-auth/react";
 
 interface ISignInBoxProps {
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
     lngObj: {
         email: string;
         password: string;
@@ -24,11 +24,31 @@ interface ISignInBoxProps {
     };
 }
 const SignInBox = (props: ISignInBoxProps) => {
-    const { handleSubmit, lngObj } = props;
+    const { lngObj } = props;
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const email = data.get("email");
+        const password = data.get("password");
+
+        if (email && password) {
+            const userAcc = {
+                username: email.toString(),
+                password: password.toString(),
+            };
+            console.log(
+                userAcc,
+                { email, password,redirectTo: "/dashboard" },
+            );
+            signIn("credentials", userAcc);
+        } else {
+            console.error("Email or password is missing");
+        }
+    };
     return (
         <Box
             sx={{
