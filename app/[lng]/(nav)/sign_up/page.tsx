@@ -12,12 +12,7 @@ export default async function SignIn({
     params: { lng: string };
 }) {
     const { t } = await useTranslation(lng, "auth");
-    const sign_in_benefits = [
-        t("sign_in_benefit_1"),
-        t("sign_in_benefit_2"),
-        t("sign_in_benefit_3"),
-        t("sign_in_benefit_4"),
-    ];
+
     const lngObj = {
         email: t("email"),
         password: t("password"),
@@ -31,22 +26,7 @@ export default async function SignIn({
         confirm_password: t("confirm_password"),
     };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        "use server";
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const email = data.get("email");
-        const password = data.get("password");
-
-        if (email && password) {
-            const userAcc = {
-                username: email.toString(),
-                password: password.toString(),
-            };
-        } else {
-            console.error("Email or password is missing");
-        }
-    };
+   
 
     return (
         <Container sx={{ maxWidth: 1350 }} maxWidth={false}>
@@ -93,7 +73,6 @@ export default async function SignIn({
                         <Typography typography="h6">{t("account")}:</Typography>
 
                         <SignUpBox
-                            handleSubmit={handleSubmit}
                             lngObj={lngObj}
                         />
                     </div>

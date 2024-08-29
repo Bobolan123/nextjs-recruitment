@@ -10,6 +10,9 @@ import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Navbar from "@/components/_navbar/navbar-server";
 import GuestFooter from "@/components/_footer/footer";
+import { SessionProvider } from "next-auth/react";
+import NextAuthWrapper from "@/lib/next-auth.wrapper";
+import "../globals.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +39,9 @@ export default function RootLayout({
         <html lang={lng} dir={dir(lng)}>
             <body className={inter.className}>
                 <AppRouterCacheProvider>
-                    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                    <ThemeProvider theme={theme}>
+                        <NextAuthWrapper>{children}</NextAuthWrapper>
+                    </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>
         </html>

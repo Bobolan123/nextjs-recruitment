@@ -18,7 +18,9 @@ import { IAllCompany } from "@/components/_company/type";
 export default async function Company() {
 
   const fetchAllCompanies = await fetch(
-    `${process.env.API}/company/readCompanies`,
+    `${process.env.NEXT_PUBLIC_SERVER
+
+}/company/readCompanies`,
     {
       method: "GET",
       next: { tags: ["list-companies"] },

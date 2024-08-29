@@ -16,10 +16,16 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { signOut, useSession } from "next-auth/react";
+import { handleFormatLink } from "@/utils/utils";
+
 interface INavbarRightProps {
     settings: string[];
     signIn: string;
     signUp: string;
+    session: any;
 }
 
 const iconProfile = [
@@ -31,13 +37,12 @@ const iconProfile = [
     <LogoutIcon />,
 ];
 const NavbarRight = (props: INavbarRightProps) => {
-    const { settings, signIn, signUp } = props;
+    // const { data: session, status } = useSession()
+    const { settings, signIn, signUp, session } = props;
     const pathname = usePathname();
     const params = useParams<{ lng: string }>();
 
     const router = useRouter();
-
-    const [showProfile, setShowProfile] = useState(false);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -46,6 +51,14 @@ const NavbarRight = (props: INavbarRightProps) => {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleClickMenuItem = async (profileItem: string) => {
+        if (profileItem === "Sign Out" || profileItem === "Đăng xuất") {
+            await signOut();
+        } else {
+            router.push(`${handleFormatLink(profileItem)}`);
+        }
     };
 
     const handleChangeLanguage = (lngButValue: string) => {
@@ -60,7 +73,7 @@ const NavbarRight = (props: INavbarRightProps) => {
         <>
             <Box sx={{ flexGrow: 0 }}>
                 <div className="flex space-x-8">
-                    {!showProfile ? (
+                    {!session ? (
                         <Link
                             href="sign_in"
                             className="text-white text-base flex justify-center items-center"
@@ -100,14 +113,14 @@ const NavbarRight = (props: INavbarRightProps) => {
                             VI
                         </button>
                     </p>
-                    {showProfile ? (
+                    {session ? (
                         <Tooltip title="Open settings">
                             <IconButton
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
                             >
                                 <p className="text-white text-lg flex justify-center items-center">
-                                    Profile
+                                    {session?.user?.name}
                                 </p>
                             </IconButton>
                         </Tooltip>
@@ -120,7 +133,9 @@ const NavbarRight = (props: INavbarRightProps) => {
                         mt: "45px",
                         "& .MuiMenu-paper": {
                             backgroundColor: "#121212",
-                            color: "#a6a6a6",
+                        },
+                        "& .MuiMenuItem-root": {
+                            color: "textDarkGray",
                         },
                         "& .MuiMenuItem-root:hover": {
                             backgroundColor: "#a6a6a6",
@@ -143,13 +158,16 @@ const NavbarRight = (props: INavbarRightProps) => {
                     onClose={handleCloseUserMenu}
                 >
                     {settings.map((setting, index) => (
-                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">
-                                {iconProfile[index]} {setting}
-                            </Typography>
+                        <MenuItem
+                            key={setting}
+                            onClick={() => handleClickMenuItem(setting)}
+                            sx={{ display: "flex", gap: "5px" }}
+                        >
+                            {iconProfile[index]} {setting}
                         </MenuItem>
                     ))}
                 </Menu>
+                <ToastContainer />
             </Box>
         </>
     );

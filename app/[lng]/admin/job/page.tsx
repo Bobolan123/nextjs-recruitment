@@ -18,7 +18,9 @@ import { IAllJob } from "@/type";
 import Link from "next/link";
 
 export default async function Job() {
-  const fetchJobs = await fetch(`${process.env.API}/job/readAllJob/`, {
+  const fetchJobs = await fetch(`${process.env.NEXT_PUBLIC_SERVER
+
+}/job/readAllJob/`, {
     method: "GET",
     next: { tags: ["jobs"] },
     cache: "no-store",

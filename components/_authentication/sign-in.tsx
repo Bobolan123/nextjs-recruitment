@@ -12,6 +12,10 @@ import { IconButton, InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { signIn } from "next-auth/react";
+import { customSignin } from "@/utils/auth/actions";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import ResendOtpModel from "./resendOtp.model";
 
 interface ISignInBoxProps {
     lngObj: {
@@ -29,6 +33,8 @@ const SignInBox = (props: ISignInBoxProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
+    const router = useRouter();
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -36,19 +42,31 @@ const SignInBox = (props: ISignInBoxProps) => {
         const password = data.get("password");
 
         if (email && password) {
-            const userAcc = {
-                username: email.toString(),
-                password: password.toString(),
-            };
-            console.log(
-                userAcc,
-                { email, password,redirectTo: "/dashboard" },
+            // Regular expression to validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email.toString())) {
+                console.error("Invalid email format");
+                toast.error("Invalid email format");
+                return;
+            }
+            const res = await customSignin(
+                email.toString(),
+                password.toString()
             );
-            signIn("credentials", userAcc);
+
+            if (res?.error) {
+                toast.error(res.error);
+            } else {
+                // Handle successful sign-in here
+                router.push("/");
+            }
         } else {
             console.error("Email or password is missing");
+            toast.error("Email or password is missing");
         }
     };
+
     return (
         <Box
             sx={{
@@ -120,6 +138,7 @@ const SignInBox = (props: ISignInBoxProps) => {
                         </Link>
                     </Grid>
                 </Grid>
+                <ResendOtpModel/>
             </Box>
         </Box>
     );

@@ -13,7 +13,9 @@ interface IJwt {
 }
 export default async function Dashboard() {
     // const jwt = getJwt();
-    // const res = await fetch(`${process.env.API}/auth/profile`, {
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER
+
+}/auth/profile`, {
     //     method: "GET",
     //     headers: {
     //         Authorization: `Bearer ${jwt}`,

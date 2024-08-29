@@ -2,19 +2,19 @@
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { IconButton, InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
+import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { sendRequest } from "@/utils/api";
+import { fetchRegister } from "@/services/auth.service";
 
 interface ISignUpBoxProps {
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
     lngObj: {
         email: string;
         password: string;
@@ -29,9 +29,42 @@ interface ISignUpBoxProps {
     };
 }
 const SignUpBox = (props: ISignUpBoxProps) => {
-    const { handleSubmit, lngObj } = props;
+    const router = useRouter();
+    const { lngObj } = props;
+    const session = useSession();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+        const email = data.get("email");
+        const password = data.get("password");
+        const confirmPassword = data.get("confirmPassword");
+
+        if (email && password && confirmPassword) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.toString())) {
+                console.error("Invalid email format");
+                toast.error("Invalid email format");
+                return;
+            }
+            if (password !== confirmPassword) {
+                toast.error("Password doesn't match");
+                return;
+            }
+            const res = await fetchRegister(email.toString(), password.toString());
+
+            if (res?.data) {
+                router.push(`verify/${res.data.id}`);
+            } else {
+                toast.error(res?.message);
+            }
+        } else {
+            toast.error("Email or password or confirm password is missing");
+        }
+    };
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleClickShowConfirmPassword = () =>

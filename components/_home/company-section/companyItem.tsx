@@ -54,7 +54,7 @@ const CompanyItem = (props: ICompanyItemProps) => {
                                 <div className="flex space-x-2">
                                     <Typography
                                         variant="subtitle1"
-                                        color={"gainsboro"}
+                                        color={"textDarkGray"}
                                         sx={{
                                             color: "#414042",
                                             backgroundColor: "#f7f7f7",
@@ -66,7 +66,7 @@ const CompanyItem = (props: ICompanyItemProps) => {
                                     </Typography>
                                     <Typography
                                         variant="subtitle1"
-                                        color={"gainsboro"}
+                                        color={"textDarkGray"}
                                         sx={{
                                             color: "#414042",
                                             backgroundColor: "#f7f7f7",

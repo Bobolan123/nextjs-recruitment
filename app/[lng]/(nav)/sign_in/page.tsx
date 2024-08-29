@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import GoogleIcon from "@mui/icons-material/Google";
 import DoneIcon from "@mui/icons-material/Done";
 import Image from "next/image";
-import { signIn } from "@/auth"
+import { auth, signIn } from "@/auth";
 
 export default async function SignIn({
     params: { lng },
@@ -28,7 +28,8 @@ export default async function SignIn({
         sign_up_now: t("sign_up_now"),
     };
 
-   
+    const session = await auth();
+    // if (!session.user) return null
 
     return (
         <Container sx={{ maxWidth: 1350 }} maxWidth={false}>
@@ -62,11 +63,7 @@ export default async function SignIn({
                         <p className="text-center m-3">{t("or")}</p>
                         <Typography typography="h6">{t("account")}:</Typography>
 
-                        <SignInBox
-                            lngObj={lngObj}
-                        />
-
-                        
+                        <SignInBox lngObj={lngObj} />
                     </div>
 
                     <div className="right">

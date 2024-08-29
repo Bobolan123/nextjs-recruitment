@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { InvalidActive, InvalidEmailPasswordError } from "./utils/auth/error";
+import { IUser } from "./types/next-auth";
+import { fetchSignIn } from "./services/auth.service";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -12,30 +15,45 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             authorize: async (credentials) => {
                 let user = null;
-
-                //Call backend
-                user = {
-                    id: "string",
-                    username: "string",
-                    password: "string",
-                    email: "string",
-                    isVerify: "boolean",
-                    type: "string",
-                    role: "string",
-                };
-                console.log(credentials)
-                if (!user) {
-                    // No user found, so this is their first attempt to login
-                    // meaning this is also the place you could do registration
+                console.log(credentials);
+                const res = await fetchSignIn(
+                    credentials.email as string,
+                    credentials.password as string
+                );
+                console.log(res);
+                if (res.statusCode === 201) {
+                    user = res.data;
+                    return user;
+                }
+                if (+res.statusCode === 401) {
+                    throw new InvalidEmailPasswordError();
+                } else if (res.statusCode === 400) {
+                    throw new InvalidActive(res.message);
+                } else {
                     throw new Error("User not found.");
                 }
-
-                // return user object with their profile data
                 return user;
             },
         }),
     ],
-    pages:{
-        signIn:"/vi/sign_in"
-    }
+    pages: {
+        signIn: "/vi/sign_in",
+    },
+    callbacks: {
+        jwt({ token, user }) {
+            if (user) {
+                // User is available during sign-in
+                token.user = user as IUser;
+            }
+            return token;
+        },
+        session({ session, token }) {
+            (session.user as IUser) = token.user;
+            return session;
+        },
+        authorized: async ({ auth }) => {
+            // Logged in users are authenticated, otherwise redirect to login page
+            return !!auth;
+        },
+    },
 });

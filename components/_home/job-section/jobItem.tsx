@@ -25,6 +25,7 @@ interface IJobItemProps {
 }
 const JobItem = (props: IJobItemProps) => {
     const { tJobItem } = props;
+    
     return (
         <>
             <Grid item key="123" xs={6} sm={4} md={3}>

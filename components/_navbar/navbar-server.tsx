@@ -2,15 +2,18 @@ import { useTranslation } from "@/app/i18n";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-
 import NavbarLeft from "./navbar-left";
 import NavbarRight from "./navbar-right";
+import { auth } from "@/auth";
 
 interface INavbarServerProps {
     lng: string;
 }
 
 export default async function NavbarServer(props: INavbarServerProps) {
+    const session = await auth()
+    console.log(session)
+
     const { t } = await useTranslation(props.lng, "navbar");
     const settings = [
         t("profile.profile_cv"),
@@ -23,6 +26,8 @@ export default async function NavbarServer(props: INavbarServerProps) {
     const pages = [t("jobs"), t("companies")];
     const jobTitles= [t("job_by_skill"),t("job_by_title"),t("job_by_company"),t("job_by_city"),]
     const companyTitles = [t("best_company"), t("company_review")]
+
+
     return (
         <>
             <AppBar 
@@ -42,6 +47,7 @@ export default async function NavbarServer(props: INavbarServerProps) {
                             settings={settings}
                             signIn={t("sign_in")}
                             signUp={t("sign_up")}
+                            session={session}
                         />
                     </Toolbar>
                 </Container>

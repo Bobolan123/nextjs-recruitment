@@ -11,12 +11,6 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Navbar from "@/components/_navbar/navbar-server";
 import GuestFooter from "@/components/_footer/footer";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "Recruitment",
-    description: "Recruitment website",
-};
 
 const languages = ["en", "vi"];
 export async function generateStaticParams() {
@@ -33,14 +27,9 @@ export default function RootLayout({
     };
 }>) {
     return (
-        <html lang={lng} dir={dir(lng)}>
-            <body className={inter.className}>
-                <AppRouterCacheProvider>
-                    <Navbar lng={lng} />
-                    {children}
-                    {/* <GuestFooter lng={lng} /> */}
-                </AppRouterCacheProvider>
-            </body>
-        </html>
+        <section>
+            <Navbar lng={lng} />
+            {children}
+        </section>
     );
 }
