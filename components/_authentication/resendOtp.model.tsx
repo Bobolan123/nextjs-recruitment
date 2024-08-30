@@ -10,6 +10,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { TextField } from "@mui/material";
 import { sendRequest } from "@/utils/api";
+import { fetchResendOtp, fetchVerifyOTP } from "@/services/auth.service";
 
 const style = {
     position: "absolute" as "absolute",
@@ -26,31 +27,38 @@ const style = {
 const steps = ["Login", "Verify", "Done"];
 
 interface IResendOtpModelProps {
-    openModel:boolean
-    email:string
-    id:number
+    handleCloseModel: any;
+    isOpenModel: boolean;
+    email: string;
+    id: number;
 }
 export default function ResendOtpModel(props: any) {
-    const [step, setStep] = React.useState(0);
-    const [open, setOpen] = React.useState(true);
-    const handleClose = () => setOpen(false);
+    const { isOpenModel, handleCloseModel, email } = props;
+    const [step, setStep] = React.useState<number>(0);
+    const [userId, setUserId] = React.useState<number>(0);
+    const [otp, setOtp] = React.useState<string>("");
 
-    const handleResendOtp = async () => {
-        setStep(1);
-        // const res = sendRequest({})
+    const handleResendOtp = async (email: string) => {
+        const res = await fetchResendOtp(email);
+        if (res?.data) {
+            setStep(1);
+            setUserId(res?.data?.id);
+        }
     };
-    const handleVerify = async () => {
-        setStep(2);
-        // const res = sendRequest({})
+    const handleVerify = async (id: number, otp: number) => {
+        const res = await fetchVerifyOTP(id, otp);
+        if (res?.data) {
+            setStep(2);
+        }
     };
     const handleDone = async () => {
-        setOpen(false);
+        handleCloseModel();
     };
     return (
         <div>
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={isOpenModel}
+                onClose={handleCloseModel}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -76,15 +84,17 @@ export default function ResendOtpModel(props: any) {
                                     Your account aren't verified
                                 </Typography>
                                 <TextField
+                                    fullWidth
                                     size="small"
                                     disabled
-                                    id="outlined-disabled"
+                                    id="email"
+                                    name="email"
                                     label="Email"
-                                    defaultValue="bobolan@gmail.com"
+                                    defaultValue={email}
                                 />
                                 <Button
                                     variant="contained"
-                                    onClick={() => handleResendOtp()}
+                                    onClick={() => handleResendOtp(email)}
                                 >
                                     Resend OTP
                                 </Button>
@@ -94,14 +104,17 @@ export default function ResendOtpModel(props: any) {
                             <>
                                 <Typography>Verify your account!</Typography>
                                 <TextField
+                                    name="otp"
                                     size="small"
-                                    id="verify"
+                                    id="otp"
                                     label="OTP"
                                     defaultValue=""
+                                    value={otp}
+                                    onChange={(e) => setOtp(e.target.value)}
                                 />
                                 <Button
                                     variant="contained"
-                                    onClick={() => handleVerify()}
+                                    onClick={() => handleVerify(userId, +otp)}
                                 >
                                     Verify
                                 </Button>

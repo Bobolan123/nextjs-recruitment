@@ -15,12 +15,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             authorize: async (credentials) => {
                 let user = null;
-                console.log(credentials);
                 const res = await fetchSignIn(
                     credentials.email as string,
                     credentials.password as string
                 );
-                console.log(res);
                 if (res.statusCode === 201) {
                     user = res.data;
                     return user;
@@ -28,7 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 if (+res.statusCode === 401) {
                     throw new InvalidEmailPasswordError();
                 } else if (res.statusCode === 400) {
-                    throw new InvalidActive(res.message);
+                    throw new InvalidActive();
                 } else {
                     throw new Error("User not found.");
                 }

@@ -11,7 +11,6 @@ export const customSignin = async (email: string, password: string) => {
         });
         return res;
     } catch (error) {
-        console.log("<<error>>>>", error);
         if ((error as any).name === "InvalidEmailPasswordError") {
             return {
                 error: (error as any).type,

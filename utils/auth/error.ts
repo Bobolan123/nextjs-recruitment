@@ -16,7 +16,7 @@ export class InvalidEmailPasswordError extends AuthError {
   }
 
   export class InvalidActive extends AuthError {
-    static type = "Email aren't verified"
+    static type = "Email isn't verified"
   }
   
 

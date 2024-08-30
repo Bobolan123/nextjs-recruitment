@@ -27,6 +27,18 @@ export const fetchSignIn = async (email: string, password: string) => {
 };
 
 //Verify OTP
+export const fetchResendOtp = async ( email: string) => {
+    const res = await sendRequest<IBackendRes<any>>({
+        method: "POST",
+        url: `${process.env.NEXT_PUBLIC_SERVER}/auth/resendOtp`,
+        body: {
+            email,
+        },
+    });
+    return res;
+};
+
+//Verify OTP
 export const fetchVerifyOTP = async (id: number, otp: number) => {
     const res = await sendRequest<IBackendRes<any>>({
         method: "POST",

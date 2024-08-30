@@ -31,6 +31,11 @@ const SignInBox = (props: ISignInBoxProps) => {
     const { lngObj } = props;
 
     const [showPassword, setShowPassword] = useState(false);
+    const [isOpenModel, setOpenModel] = useState(false);
+    const [emailModel,setEmailModel] = useState("");
+
+    const handleCloseModel = () => setOpenModel(false);
+
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
     const router = useRouter();
@@ -38,31 +43,34 @@ const SignInBox = (props: ISignInBoxProps) => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const email = data.get("email");
-        const password = data.get("password");
+        const email = data.get("email")?.toString();
+        const password = data.get("password")?.toString();
 
         if (email && password) {
             // Regular expression to validate email format
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (!emailRegex.test(email.toString())) {
-                console.error("Invalid email format");
+            if (!emailRegex.test(email)) {
                 toast.error("Invalid email format");
                 return;
             }
             const res = await customSignin(
-                email.toString(),
-                password.toString()
+                email,
+                password
             );
-
-            if (res?.error) {
+            if (res?.error && res.code === 1) {
+                //invalid email password
                 toast.error(res.error);
+            } else if (res?.error && res.code === 2) {
+                //inverified account
+                setEmailModel(email)
+                setOpenModel(true);
+
             } else {
                 // Handle successful sign-in here
                 router.push("/");
             }
         } else {
-            console.error("Email or password is missing");
             toast.error("Email or password is missing");
         }
     };
@@ -138,7 +146,7 @@ const SignInBox = (props: ISignInBoxProps) => {
                         </Link>
                     </Grid>
                 </Grid>
-                <ResendOtpModel/>
+                <ResendOtpModel isOpenModel={isOpenModel} handleCloseModel={handleCloseModel} email={emailModel}/>
             </Box>
         </Box>
     );
