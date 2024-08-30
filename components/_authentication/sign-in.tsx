@@ -8,7 +8,7 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment, Typography } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { signIn } from "next-auth/react";
@@ -16,6 +16,7 @@ import { customSignin } from "@/utils/auth/actions";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import ResendOtpModel from "./resendOtp.model";
+import ForgotPasswordModel from "./forgotPassword.model";
 
 interface ISignInBoxProps {
     lngObj: {
@@ -31,10 +32,14 @@ const SignInBox = (props: ISignInBoxProps) => {
     const { lngObj } = props;
 
     const [showPassword, setShowPassword] = useState(false);
-    const [isOpenModel, setOpenModel] = useState(false);
-    const [emailModel,setEmailModel] = useState("");
+    const [isOpenModelResendOtp, setIsOpenModelResendOtp] = useState(false);
+    const [isOpenModelForgotPassword, setIsOpenModelForgotPassword] =
+        useState(false);
+    const [emailModel, setEmailModel] = useState("");
 
-    const handleCloseModel = () => setOpenModel(false);
+    const handleCloseModelResendOtp = () => setIsOpenModelResendOtp(false);
+    const handleCloseModelForgotPassword = () =>
+        setIsOpenModelForgotPassword(false);
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -54,18 +59,14 @@ const SignInBox = (props: ISignInBoxProps) => {
                 toast.error("Invalid email format");
                 return;
             }
-            const res = await customSignin(
-                email,
-                password
-            );
+            const res = await customSignin(email, password);
             if (res?.error && res.code === 1) {
                 //invalid email password
                 toast.error(res.error);
             } else if (res?.error && res.code === 2) {
                 //inverified account
-                setEmailModel(email)
-                setOpenModel(true);
-
+                setEmailModel(email);
+                setIsOpenModelResendOtp(true);
             } else {
                 // Handle successful sign-in here
                 router.push("/");
@@ -131,9 +132,18 @@ const SignInBox = (props: ISignInBoxProps) => {
                 </Button>
                 <Grid container>
                     <Grid item xs>
-                        <Link href="#" variant="body2">
-                            {lngObj.forgot_password}
-                        </Link>
+                        <button
+                            type="button"
+                            onClick={() => setIsOpenModelForgotPassword(true)}
+                        >
+                            <Typography
+                                variant="subtitle2"
+                                color="#1976D2"
+                                sx={{ cursor: "pointer" }}
+                            >
+                                {lngObj.forgot_password}
+                            </Typography>
+                        </button>
                     </Grid>
                     <Grid item>
                         <span className="mr-1">
@@ -146,7 +156,17 @@ const SignInBox = (props: ISignInBoxProps) => {
                         </Link>
                     </Grid>
                 </Grid>
-                <ResendOtpModel isOpenModel={isOpenModel} handleCloseModel={handleCloseModel} email={emailModel}/>
+                <ResendOtpModel
+                    isOpenModelResendOtp={isOpenModelResendOtp}
+                    handleCloseModelResendOtp={handleCloseModelResendOtp}
+                    email={emailModel}
+                />
+                <ForgotPasswordModel
+                    isOpenModelForgotPassword={isOpenModelForgotPassword}
+                    handleCloseModelForgotPassword={
+                        handleCloseModelForgotPassword
+                    }
+                />
             </Box>
         </Box>
     );

@@ -10,7 +10,11 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { TextField } from "@mui/material";
 import { sendRequest } from "@/utils/api";
-import { fetchResendOtp, fetchVerifyOTP } from "@/services/auth.service";
+import {
+    fetchChangePassword,
+    fetchResendOtp,
+    fetchVerifyOTP,
+} from "@/services/auth.service";
 
 const style = {
     position: "absolute" as "absolute",
@@ -26,13 +30,18 @@ const style = {
 
 const steps = ["Login", "Verify", "Done"];
 
-interface IResendOtpModelProps {
-    handleCloseModelResendOtp: any;
-    isOpenModelResendOtp: boolean;
+interface IForgotPasswordModelProps {
+    handleCloseModelForgotPassword: any;
+    isOpenModelForgotPassword: boolean;
     email: string;
+    id: number;
 }
-export default function ResendOtpModel(props: IResendOtpModelProps) {
-    const { isOpenModelResendOtp, handleCloseModelResendOtp, email } = props;
+export default function ForgotPasswordModel(props: any) {
+    const { isOpenModelForgotPassword, handleCloseModelForgotPassword } = props;
+
+    const [email, setEmail] = React.useState<string>("");
+    const [password, setPassword] = React.useState<string>("");
+    const [confirmPassword, setConfirmPassword] = React.useState<string>("");
     const [step, setStep] = React.useState<number>(0);
     const [userId, setUserId] = React.useState<number>(0);
     const [otp, setOtp] = React.useState<string>("");
@@ -41,23 +50,26 @@ export default function ResendOtpModel(props: IResendOtpModelProps) {
         const res = await fetchResendOtp(email);
         if (res?.data) {
             setStep(1);
-            setUserId(res?.data?.id);
         }
     };
-    const handleVerify = async (id: number, otp: number) => {
-        const res = await fetchVerifyOTP(id, otp);
+    const handleChangePassword = async (
+        email: string,
+        password: string,
+        confirmPassword: string
+    ) => {
+        const res = await fetchChangePassword(email, password, confirmPassword);
         if (res?.data) {
             setStep(2);
         }
     };
     const handleDone = async () => {
-        handleCloseModelResendOtp();
+        handleCloseModelForgotPassword();
     };
     return (
         <div>
             <Modal
-                open={isOpenModelResendOtp}
-                onClose={handleCloseModelResendOtp}
+                open={isOpenModelForgotPassword}
+                onClose={handleCloseModelForgotPassword}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -79,40 +91,75 @@ export default function ResendOtpModel(props: IResendOtpModelProps) {
                     >
                         {step === 0 && (
                             <>
-                                <Typography>
-                                    Your account aren't verified
+                                <Typography variant="h5">
+                                    Forgot password?
                                 </Typography>
                                 <TextField
                                     fullWidth
                                     size="small"
-                                    disabled
                                     id="email"
                                     name="email"
                                     label="Email"
-                                    defaultValue={email}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
+
                                 <Button
                                     variant="contained"
                                     onClick={() => handleResendOtp(email)}
                                 >
-                                    Resend OTP
+                                    Submit
                                 </Button>
                             </>
                         )}
                         {step === 1 && (
                             <>
-                                <Typography>Verify your account!</Typography>
+                                <Typography>Change password!</Typography>
                                 <TextField
+                                    fullWidth
                                     name="otp"
                                     size="small"
                                     id="otp"
                                     label="OTP"
                                     defaultValue=""
-
+                                    value={otp}
+                                    onChange={(e) => setOtp(e.target.value)}
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    size="small"
+                                    fullWidth
+                                    name="password"
+                                    label="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    size="small"
+                                    name="confirmPassword"
+                                    label="confirmPassword"
+                                    id="confirmPassword"
+                                    autoComplete="current-password"
+                                    onChange={(e) =>
+                                        setConfirmPassword(e.target.value)
+                                    }
                                 />
                                 <Button
                                     variant="contained"
-                                    onClick={() => handleVerify(userId, +otp)}
+                                    onClick={() =>
+                                        handleChangePassword(
+                                            email,
+                                            password,
+                                            confirmPassword
+                                        )
+                                    }
                                 >
                                     Verify
                                 </Button>
@@ -122,7 +169,7 @@ export default function ResendOtpModel(props: IResendOtpModelProps) {
                         {step === 2 && (
                             <>
                                 <Typography>
-                                    Succesfully. Please sign up
+                                    Succesfully. Please sign in!
                                 </Typography>
                                 <Button
                                     variant="contained"

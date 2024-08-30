@@ -27,7 +27,7 @@ export const fetchSignIn = async (email: string, password: string) => {
 };
 
 //Verify OTP
-export const fetchResendOtp = async ( email: string) => {
+export const fetchResendOtp = async (email: string) => {
     const res = await sendRequest<IBackendRes<any>>({
         method: "POST",
         url: `${process.env.NEXT_PUBLIC_SERVER}/auth/resendOtp`,
@@ -46,6 +46,36 @@ export const fetchVerifyOTP = async (id: number, otp: number) => {
         body: {
             id,
             otp,
+        },
+    });
+    return res;
+};
+
+//Send email to get OTP to change password
+export const fetchForgotPassword = async (email: string) => {
+    const res = await sendRequest<IBackendRes<any>>({
+        method: "POST",
+        url: `${process.env.NEXT_PUBLIC_SERVER}/auth/forgotPassword`,
+        body: {
+            email,
+        },
+    });
+    return res;
+};
+
+//Change Password
+export const fetchChangePassword = async (
+    email: string,
+    password: string,
+    confirmPassword: string
+) => {
+    const res = await sendRequest<IBackendRes<any>>({
+        method: "POST",
+        url: `${process.env.NEXT_PUBLIC_SERVER}/auth/changePassword`,
+        body: {
+            email,
+            password,
+            confirmPassword,
         },
     });
     return res;
