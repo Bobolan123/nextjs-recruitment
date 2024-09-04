@@ -12,7 +12,6 @@ interface INavbarServerProps {
 
 export default async function NavbarServer(props: INavbarServerProps) {
     const session = await auth()
-    console.log(session)
 
     const { t } = await useTranslation(props.lng, "navbar");
     const settings = [

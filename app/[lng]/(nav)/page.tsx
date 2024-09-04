@@ -6,7 +6,7 @@ import SearchText from "@/components/common/search-box/searchText";
 import CompanyItem from "@/components/_home/company-section/companyItem";
 import JobItem from "@/components/_home/job-section/jobItem";
 import NavbarServer from "@/components/_navbar/navbar-server";
-import "../../globals.css";
+import { fetchCompanies, fetchJobs } from "@/services/home/home.service";
 
 export default async function Home({
     params: { lng },
@@ -29,6 +29,9 @@ export default async function Home({
         at_office: t("at_office"),
     };
 
+    const resTopCompany = await fetchCompanies(1, 6);
+    const resNewJobs = await fetchJobs(1, 8, "desc");
+    console.log(resNewJobs);
     return (
         <>
             <div className="flex flex-col  space-y-20">
@@ -56,7 +59,10 @@ export default async function Home({
                         </div>
 
                         <div className="flex gap-2 items-center">
-                            <Typography variant="subtitle1" color={"textDarkGray"}>
+                            <Typography
+                                variant="subtitle1"
+                                color={"textDarkGray"}
+                            >
                                 {t("suggest_for_you")}
                             </Typography>
                             <Typography
@@ -75,21 +81,32 @@ export default async function Home({
                         </div>
                     </Box>
                 </div>
-                <div className="company-section">
-                    <Container>
-                        <Typography className="text-center" variant="h4">
-                            <b>{t("top_employers")}</b>
-                        </Typography>
-                        <Grid
-                            container
-                            spacing={{ xs: 2, md: 3 }}
-                            columns={{ xs: 4, sm: 12, md: 12 }}
-                            justifyContent="center"
-                        >
-                            <CompanyItem tCompanyItem={tCompanyItem} />
-                        </Grid>
-                    </Container>
-                </div>
+                {resTopCompany?.data && (
+                    <div className="company-section">
+                        <Container>
+                            <Typography className="text-center" variant="h4">
+                                <b>{t("top_employers")}</b>
+                            </Typography>
+                            <Grid
+                                container
+                                spacing={{ xs: 2, md: 3 }}
+                                columns={{ xs: 4, sm: 12, md: 12 }}
+                                justifyContent="center"
+                            >
+                                {resTopCompany?.data?.companies.map(
+                                    (company, index) => {
+                                        return (
+                                            <CompanyItem
+                                                company={company}
+                                                tCompanyItem={tCompanyItem}
+                                            />
+                                        );
+                                    }
+                                )}
+                            </Grid>
+                        </Container>
+                    </div>
+                )}
 
                 <div className="job-section">
                     <Container sx={{ maxWidth: "92%" }} maxWidth={false}>

@@ -189,48 +189,6 @@ const TabPanelJobDetail = (props: ITabPanelCompanyDetail) => {
                         </Box>
                     </section>
 
-                    <section className="skill-exp pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
-                        <Typography
-                            variant="h2"
-                            fontSize={22}
-                            fontWeight={700}
-                            mb={2}
-                        >
-                            Your skills and experience
-                        </Typography>
-                        <Box
-                            component="div"
-                            sx={{
-                                fontSize: 16,
-                                fontWeight: 400,
-                                lineHeight: 1.8,
-                            }}
-                        >
-                            text
-                        </Box>
-                    </section>
-
-                    <section className="skill-exp pb-5 mb-5 border-b-2 border-gray-200 border-dashed">
-                        <Typography
-                            variant="h2"
-                            fontSize={22}
-                            fontWeight={700}
-                            mb={2}
-                        >
-                            Why you'll love working here
-                        </Typography>
-                        <Box
-                            component="div"
-                            sx={{
-                                fontSize: 16,
-                                fontWeight: 400,
-                                lineHeight: 1.8,
-                            }}
-                        >
-                            text
-                        </Box>
-                    </section>
-
                     <section className="company-overview pb-5">
                         <div className="flex">
                             <Typography

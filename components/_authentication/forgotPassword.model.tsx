@@ -15,6 +15,8 @@ import {
     fetchResendOtp,
     fetchVerifyOTP,
 } from "@/services/auth.service";
+import { toast } from "react-toastify";
+import { IsValidEmail } from "@/utils/utils";
 
 const style = {
     position: "absolute" as "absolute",
@@ -43,13 +45,18 @@ export default function ForgotPasswordModel(props: any) {
     const [password, setPassword] = React.useState<string>("");
     const [confirmPassword, setConfirmPassword] = React.useState<string>("");
     const [step, setStep] = React.useState<number>(0);
-    const [userId, setUserId] = React.useState<number>(0);
     const [otp, setOtp] = React.useState<string>("");
 
     const handleResendOtp = async (email: string) => {
+        if (!email || !IsValidEmail(email)) {
+            toast.error("Email is invalid");
+            return;
+        }
         const res = await fetchResendOtp(email);
         if (res?.data) {
             setStep(1);
+        } else {
+            toast.error(res?.message);
         }
     };
     const handleChangePassword = async (
@@ -95,6 +102,7 @@ export default function ForgotPasswordModel(props: any) {
                                     Forgot password?
                                 </Typography>
                                 <TextField
+                                    required
                                     fullWidth
                                     size="small"
                                     id="email"
