@@ -19,11 +19,5 @@ export interface ILocation {
     id: number;
     address: string;
     address_city: string;
-    address1: string;
-    address_city1: string;
-    address2: string;
-    address_city2: string;
-    address3: string;
-    address_city3: string;
-    company: ICompany;
+    // company: ICompany;
 }

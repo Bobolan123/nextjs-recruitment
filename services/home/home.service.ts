@@ -11,7 +11,9 @@ interface IData {
 export const fetchCompanies = async (
     page: number,
     limit: number,
-    sort?: any
+    qsObject?: {
+        sort:string
+    }
 ) => {
     const session = await auth()
     const res = await sendRequest<IBackendRes<IData>>({
@@ -20,7 +22,7 @@ export const fetchCompanies = async (
         queryParams: {
             page,
             limit,
-            sort
+            sort: qsObject?.sort
         },
         headers:{
             Authorization: `Bearer ${session?.accessToken}`

@@ -6,7 +6,7 @@ var link_1 = require("next/link");
 var KeyboardArrowRight_1 = require("@mui/icons-material/KeyboardArrowRight");
 var Adjust_1 = require("@mui/icons-material/Adjust");
 var CompanyItem = function (props) {
-    var _a, _b;
+    var _a, _b, _c;
     var tCompanyItem = props.tCompanyItem, company = props.company;
     return (React.createElement(React.Fragment, null,
         React.createElement(material_1.Grid, { item: true, key: "123", xs: 12, sm: 6, md: 4 },
@@ -37,12 +37,16 @@ var CompanyItem = function (props) {
                         React.createElement(material_1.CardContent, { sx: {
                                 backgroundColor: "#f0f0f0"
                             } },
-                            React.createElement("div", { className: "grid grid-cols-2 gap-4 " },
-                                React.createElement(material_1.Typography, { variant: "subtitle1", component: "h6" }, "HCM"),
+                            React.createElement("div", { className: "flex justify-between items-center gap-4 " },
+                                React.createElement(material_1.Typography, { variant: "subtitle1", component: "h6" }, (_b = company === null || company === void 0 ? void 0 : company.locations) === null || _b === void 0 ? void 0 : _b.map(function (location, index) {
+                                    return index === 0
+                                        ? location.address_city
+                                        : " - " + location.address_city;
+                                }).join("")),
                                 React.createElement(material_1.Typography, { variant: "subtitle1", component: "h6", className: "col-end-7 col-span-2" },
                                     React.createElement(Adjust_1["default"], { sx: { color: "green" } }),
-                                    " ", (_b = company === null || company === void 0 ? void 0 : company.jobs) === null || _b === void 0 ? void 0 :
-                                    _b.length,
+                                    " ", (_c = company === null || company === void 0 ? void 0 : company.jobs) === null || _c === void 0 ? void 0 :
+                                    _c.length,
                                     " ",
                                     tCompanyItem.jobs,
                                     React.createElement(KeyboardArrowRight_1["default"], null))))))))));

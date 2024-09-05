@@ -23,8 +23,8 @@
             "@/components/*": ["components/*"],
             "@/i18n/*": ["app/i18n/*"],
             "@/public/*": ["public/*"],
-            "@/types/*": ["types/*"]
-            
+            "@/types/*": ["types/*"],
+            "@/utils/*": ["utils/*"]
         }
     },
     // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/i18n/settings.d.ts", "app/i18n/index.ts", "app/i18n/settings.ts", "middleware.ts"],

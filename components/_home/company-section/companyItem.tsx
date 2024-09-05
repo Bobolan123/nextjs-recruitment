@@ -85,12 +85,18 @@ const CompanyItem = (props: ICompanyItemProps) => {
                                     backgroundColor: "#f0f0f0",
                                 }}
                             >
-                                <div className="grid grid-cols-2 gap-4 ">
+                                <div className="flex justify-between items-center gap-4 ">
                                     <Typography
                                         variant="subtitle1"
                                         component="h6"
                                     >
-                                        HCM
+                                        {company?.locations
+                                            ?.map((location, index) =>
+                                                index === 0
+                                                    ? location.address_city
+                                                    : ` - ${location.address_city}`
+                                            )
+                                            .join("")} 
                                     </Typography>
                                     <Typography
                                         variant="subtitle1"

@@ -7,6 +7,7 @@ import CompanyItem from "@/components/_home/company-section/companyItem";
 import JobItem from "@/components/_home/job-section/jobItem";
 import NavbarServer from "@/components/_navbar/navbar-server";
 import { fetchCompanies, fetchJobs } from "@/services/home/home.service";
+import { shuffleArray } from "@/utils/utils";
 
 export default async function Home({
     params: { lng },
@@ -30,8 +31,8 @@ export default async function Home({
     };
 
     const resTopCompany = await fetchCompanies(1, 6);
-    const resNewJobs = await fetchJobs(1, 8, "desc");
-    console.log(resNewJobs);
+    const resNewJobs = await fetchJobs(1, 8, { sort: "desc" });
+
     return (
         <>
             <div className="flex flex-col  space-y-20">
@@ -93,16 +94,17 @@ export default async function Home({
                                 columns={{ xs: 4, sm: 12, md: 12 }}
                                 justifyContent="center"
                             >
-                                {resTopCompany?.data?.companies.map(
-                                    (company, index) => {
-                                        return (
-                                            <CompanyItem
-                                                company={company}
-                                                tCompanyItem={tCompanyItem}
-                                            />
-                                        );
-                                    }
-                                )}
+                                {shuffleArray(
+                                    resTopCompany?.data?.companies
+                                ).map((company, index) => {
+                                    return (
+                                        <CompanyItem
+                                            key={index} // Add a key prop to avoid React warnings
+                                            company={company}
+                                            tCompanyItem={tCompanyItem}
+                                        />
+                                    );
+                                })}
                             </Grid>
                         </Container>
                     </div>

@@ -40,7 +40,7 @@ exports.fetchJobs = exports.fetchCompanies = void 0;
 var auth_1 = require("@/auth");
 var api_1 = require("@/utils/api");
 //Fetch companies
-exports.fetchCompanies = function (page, limit, sort) { return __awaiter(void 0, void 0, void 0, function () {
+exports.fetchCompanies = function (page, limit, qsObject) { return __awaiter(void 0, void 0, void 0, function () {
     var session, res;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -53,7 +53,7 @@ exports.fetchCompanies = function (page, limit, sort) { return __awaiter(void 0,
                         queryParams: {
                             page: page,
                             limit: limit,
-                            sort: sort
+                            sort: qsObject === null || qsObject === void 0 ? void 0 : qsObject.sort
                         },
                         headers: {
                             Authorization: "Bearer " + (session === null || session === void 0 ? void 0 : session.accessToken)
