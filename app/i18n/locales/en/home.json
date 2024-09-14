@@ -11,6 +11,8 @@
     "posted":"Posted",
     "hour_ago":"hour ago",
     "hour_agos":"hours ago",
+    "day_agos":"days ago",
+    "day_ago":"day ago",
     "sign_in_to_view": "Sign in to view salary",
     "at_office": "At office",
     "view_more":"View more"

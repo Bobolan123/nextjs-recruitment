@@ -11,8 +11,9 @@
     "posted": "Đã đăng",
     "hour_ago": "giờ trước",
     "hour_agos": "giờ trước",
+    "day_agos": "giờ trước",
+    "day_ago": "giờ trước",
     "sign_in_to_view": "Đăng nhập để xem mức lương",
     "at_office": "Tại văn phòng",
-    "view_more":"Xem thêm"
-
+    "view_more": "Xem thêm"
 }

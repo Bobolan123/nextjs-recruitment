@@ -13,6 +13,7 @@ declare module "@mui/material/styles" {
     interface CustomPalette {
         anger: PaletteColorOptions;
         textDarkGray: string;
+        green: string;
     }
     interface Palette extends CustomPalette {}
     interface PaletteOptions extends CustomPalette {}
@@ -53,6 +54,16 @@ const theme = createTheme({
                 },
             },
         },
+        // MuiCardContent: {
+        //     styleOverrides: {
+        //         root: {
+        //             padding: "0",
+        //             "&:last-child": {
+        //                 padding: "17px 24px",
+        //             },
+        //         },
+        //     },
+        // },
     },
     typography: {
         fontFamily: lexend.style.fontFamily,
@@ -66,6 +77,7 @@ const theme = createTheme({
     palette: {
         anger: createColor("#ed1b2f"), //button color
         textDarkGray: "#a6a6a6", //text color
+        green: "#008000",
     },
 });
 

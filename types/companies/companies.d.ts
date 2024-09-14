@@ -18,6 +18,6 @@ export interface ICompany {
 export interface ILocation {
     id: number;
     address: string;
-    address_city: string;
+    city: string;
     // company: ICompany;
 }

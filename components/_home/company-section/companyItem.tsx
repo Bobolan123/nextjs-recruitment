@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import robot from "@/public/logo/robot.png";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AdjustIcon from "@mui/icons-material/Adjust";
 import { ICompany } from "@/types/companies/companies";
@@ -34,12 +33,11 @@ const CompanyItem = (props: ICompanyItemProps) => {
                     }}
                 >
                     <CardActionArea>
-                        <Link href={`/company/`}>
+                        <Link href={`/company/${company.name}`}>
                             <CardMedia component="div">
                                 <Image
                                     className="ml-auto mr-auto mt-10 shadow-2xl"
-                                    src={`${process.env.NEXT_PUBLIC_SERVER_IMAGE}/company/${company.logo}`}
-                                    // src={robot}
+                                    src={`${process.env.NEXT_PUBLIC_SERVER_COMPANY_IMAGE}/${company.logo}`}
                                     width={150}
                                     height={150}
                                     alt="Logo"
@@ -85,18 +83,19 @@ const CompanyItem = (props: ICompanyItemProps) => {
                                     backgroundColor: "#f0f0f0",
                                 }}
                             >
-                                <div className="flex justify-between items-center gap-4 ">
+                                <div className="flex justify-between items-center gap-4 pb-0">
                                     <Typography
                                         variant="subtitle1"
-                                        component="h6"
+                                        component="p"
                                     >
                                         {company?.locations
+                                            .slice(0, 2)
                                             ?.map((location, index) =>
                                                 index === 0
-                                                    ? location.address_city
-                                                    : ` - ${location.address_city}`
+                                                    ? location.city
+                                                    : ` - ${location.city}`
                                             )
-                                            .join("")} 
+                                            .join("")}{" "}
                                     </Typography>
                                     <Typography
                                         variant="subtitle1"

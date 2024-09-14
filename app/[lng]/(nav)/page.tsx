@@ -10,7 +10,7 @@ import { fetchCompanies, fetchJobs } from "@/services/home/home.service";
 import { shuffleArray } from "@/utils/utils";
 
 export default async function Home({
-    params: { lng },
+    params: { lng }, 
 }: {
     params: { lng: string };
 }) {
@@ -26,6 +26,8 @@ export default async function Home({
         posted: t("posted"),
         hour_ago: t("hour_ago"),
         hour_agos: t("hour_agos"),
+        day_agos: t("day_agos"),
+        day_ago: t("day_agos"),
         sign_in_to_view: t("sign_in_to_view"),
         at_office: t("at_office"),
     };
@@ -109,36 +111,46 @@ export default async function Home({
                         </Container>
                     </div>
                 )}
-
-                <div className="job-section">
-                    <Container sx={{ maxWidth: "92%" }} maxWidth={false}>
-                        <Typography className="text-center" variant="h4">
-                            <b>{t("top_employers")}</b>
-                        </Typography>
-                        <Grid
-                            container
-                            spacing={{ xs: 2, md: 3 }}
-                            columns={{ xs: 4, sm: 12, md: 12 }}
-                            justifyContent="center"
-                        >
-                            <JobItem tJobItem={tJobItem} />
-                        </Grid>
-                    </Container>
-                    <Box textAlign="center">
-                        <Button
-                            variant="outlined"
-                            color="anger"
-                            sx={{
-                                padding: "10px 15px",
-                                marginTop: 5,
-                            }}
-                        >
-                            <span>
-                                {t("view_more")} 12 {t("jobs")}
-                            </span>
-                        </Button>
-                    </Box>
-                </div>
+                {resNewJobs.data && (
+                    <div className="job-section">
+                        <Container sx={{ maxWidth: "92%" }} maxWidth={false}>
+                            <Typography className="text-center" variant="h4">
+                                <b>{resNewJobs.data.totalJobs} {t("it_jobs")}</b>
+                            </Typography>
+                            <Grid
+                                container
+                                spacing={{ xs: 2, md: 3 }}
+                                columns={{ xs: 4, sm: 12, md: 12 }}
+                                justifyContent="center"
+                            >
+                                {resNewJobs.data.jobs.map((job) => {
+                                    return (
+                                        <>
+                                            <JobItem
+                                                job={job}
+                                                tJobItem={tJobItem}
+                                            />
+                                        </>
+                                    );
+                                })}
+                            </Grid>
+                        </Container>
+                        <Box textAlign="center">
+                            <Button
+                                variant="outlined"
+                                color="anger"
+                                sx={{
+                                    padding: "10px 15px",
+                                    marginTop: 5,
+                                }}
+                            >
+                                <span>
+                                    {t("view_more")} 12 {t("jobs")}
+                                </span>
+                            </Button>
+                        </Box>
+                    </div>
+                )}
             </div>
         </>
     );

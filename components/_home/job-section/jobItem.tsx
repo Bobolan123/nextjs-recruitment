@@ -11,21 +11,31 @@ import Link from "next/link";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
-import { t } from "i18next";
 import { TagHot, TagSuperHot } from "@/components/common/tags";
+import { IJob } from "@/types/jobs/jobs";
+import { auth } from "@/auth";
+import {
+    getDaysSinceCreation,
+    getHoursSinceCreation,
+    isLessThanOneDay,
+} from "@/utils/time/time";
 
 interface IJobItemProps {
+    job: IJob;
     tJobItem: {
         posted: string;
         hour_ago: string;
         hour_agos: string;
+        day_agos: string;
+        day_ago: string;
         sign_in_to_view: string;
         at_office: string;
     };
 }
-const JobItem = (props: IJobItemProps) => {
-    const { tJobItem } = props;
-    
+const JobItem = async (props: IJobItemProps) => {
+    const { tJobItem, job } = props;
+    const session = await auth();
+
     return (
         <>
             <Grid item key="123" xs={6} sm={4} md={3}>
@@ -40,7 +50,7 @@ const JobItem = (props: IJobItemProps) => {
                     <CardActionArea className="static">
                         <div className="absolute right-0 top-4">
                             <TagHot />
-                        </div> 
+                        </div>
                         <Link href={`/company/`}>
                             <CardMedia component="div" sx={{}}></CardMedia>
 
@@ -52,7 +62,30 @@ const JobItem = (props: IJobItemProps) => {
                                     color={"lightgray"}
                                     className=""
                                 >
-                                    {tJobItem.posted} 4 {tJobItem.hour_agos}
+                                    {tJobItem.posted}{" "}
+                                    {isLessThanOneDay(job.created_at) ? (
+                                        <>
+                                            {getHoursSinceCreation(
+                                                job.created_at
+                                            )}{" "}
+                                            {getHoursSinceCreation(
+                                                job.created_at
+                                            ) === 1
+                                                ? tJobItem.hour_ago
+                                                : tJobItem.hour_agos}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {getDaysSinceCreation(
+                                                job.created_at
+                                            )}{" "}
+                                            {getDaysSinceCreation(
+                                                job.created_at
+                                            ) === 1
+                                                ? tJobItem.day_ago
+                                                : tJobItem.day_agos}
+                                        </>
+                                    )}
                                 </Typography>
                                 <Typography
                                     gutterBottom
@@ -60,30 +93,34 @@ const JobItem = (props: IJobItemProps) => {
                                     component="h6"
                                     className=""
                                 >
-                                    <b>
-                                        Middle/ Senior Backend Engineer (Java,
-                                        English)
-                                    </b>
+                                    <b>{job.name}</b>
                                 </Typography>
                                 <Typography
                                     gutterBottom
                                     variant="subtitle1"
                                     component="h6"
-                                    className="flex space-x-3"
+                                    className="flex items-center space-x-3"
                                 >
                                     <Image
-                                        src="/logo/robot.png"
+                                        src={`${process.env.NEXT_PUBLIC_SERVER_COMPANY_IMAGE}/${job.company.logo}`}
                                         width={50}
                                         height={50}
                                         alt=""
                                     />
-                                    <span>Company name</span>
+                                    <span>{job.company.name}</span>
                                 </Typography>
-                                <div className="flex space-x-1">
+                                <div className="flex space-x-1 items-center">
                                     <PaidOutlinedIcon />
-                                    <u className="font-semibold ">
-                                        {tJobItem.sign_in_to_view}
-                                    </u>
+
+                                    {session?.user ? (
+                                        <Typography variant="h6" color="green">
+                                            {job.salary}
+                                        </Typography>
+                                    ) : (
+                                        <u className="font-semibold ">
+                                            {tJobItem.sign_in_to_view}
+                                        </u>
+                                    )}
                                 </div>
                                 <hr className="mt-2 mb-3"></hr>
                                 <Typography variant="subtitle1" color={""}>
@@ -96,31 +133,28 @@ const JobItem = (props: IJobItemProps) => {
                                     <FmdGoodOutlinedIcon
                                         sx={{ color: "textDarkGray" }}
                                     />
-                                    HCM
+                                    {job.location}
                                 </Typography>
                                 <div className="flex space-x-2">
-                                    <Typography
-                                        variant="subtitle1"
-                                        sx={{
-                                            color: "#414042",
-                                            backgroundColor: "#f7f7f7",
-                                            borderRadius: 100,
-                                            padding: "1px 10px",
-                                        }}
-                                    >
-                                        Java
-                                    </Typography>
-                                    <Typography
-                                        variant="subtitle1"
-                                        sx={{
-                                            color: "#414042",
-                                            backgroundColor: "#f7f7f7",
-                                            borderRadius: 100,
-                                            padding: "1px 10px",
-                                        }}
-                                    >
-                                        Java
-                                    </Typography>
+                                    {job.skills.map((skill) => {
+                                        return (
+                                            <>
+                                                <Typography
+                                                    key={skill.id}
+                                                    variant="subtitle1"
+                                                    sx={{
+                                                        color: "#414042",
+                                                        backgroundColor:
+                                                            "#f7f7f7",
+                                                        borderRadius: 100,
+                                                        padding: "1px 10px",
+                                                    }}
+                                                >
+                                                    {skill.name}
+                                                </Typography>
+                                            </>
+                                        );
+                                    })}
                                 </div>
                             </CardContent>
                         </Link>

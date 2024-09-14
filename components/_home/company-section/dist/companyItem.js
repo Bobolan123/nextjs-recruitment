@@ -17,11 +17,9 @@ var CompanyItem = function (props) {
                     flexDirection: "column"
                 } },
                 React.createElement(material_1.CardActionArea, null,
-                    React.createElement(link_1["default"], { href: "/company/" },
+                    React.createElement(link_1["default"], { href: "/company/" + company.name },
                         React.createElement(material_1.CardMedia, { component: "div" },
-                            React.createElement(image_1["default"], { className: "ml-auto mr-auto mt-10 shadow-2xl", src: process.env.NEXT_PUBLIC_SERVER_IMAGE + "/company/" + company.logo, 
-                                // src={robot}
-                                width: 150, height: 150, alt: "Logo" })),
+                            React.createElement(image_1["default"], { className: "ml-auto mr-auto mt-10 shadow-2xl", src: process.env.NEXT_PUBLIC_SERVER_COMPANY_IMAGE + "/" + company.logo, width: 150, height: 150, alt: "Logo" })),
                         React.createElement(material_1.CardContent, { sx: { flexGrow: 1 } },
                             React.createElement(material_1.Typography, { gutterBottom: true, variant: "h5", component: "h2", className: "text-center" },
                                 React.createElement("b", null, company.name)),
@@ -37,12 +35,14 @@ var CompanyItem = function (props) {
                         React.createElement(material_1.CardContent, { sx: {
                                 backgroundColor: "#f0f0f0"
                             } },
-                            React.createElement("div", { className: "flex justify-between items-center gap-4 " },
-                                React.createElement(material_1.Typography, { variant: "subtitle1", component: "h6" }, (_b = company === null || company === void 0 ? void 0 : company.locations) === null || _b === void 0 ? void 0 : _b.map(function (location, index) {
-                                    return index === 0
-                                        ? location.address_city
-                                        : " - " + location.address_city;
-                                }).join("")),
+                            React.createElement("div", { className: "flex justify-between items-center gap-4 pb-0" },
+                                React.createElement(material_1.Typography, { variant: "subtitle1", component: "p" }, (_b = company === null || company === void 0 ? void 0 : company.locations.slice(0, 2)) === null || _b === void 0 ? void 0 :
+                                    _b.map(function (location, index) {
+                                        return index === 0
+                                            ? location.city
+                                            : " - " + location.city;
+                                    }).join(""),
+                                    " "),
                                 React.createElement(material_1.Typography, { variant: "subtitle1", component: "h6", className: "col-end-7 col-span-2" },
                                     React.createElement(Adjust_1["default"], { sx: { color: "green" } }),
                                     " ", (_c = company === null || company === void 0 ? void 0 : company.jobs) === null || _c === void 0 ? void 0 :
