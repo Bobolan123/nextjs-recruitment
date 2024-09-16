@@ -12,13 +12,17 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import VerticalTabJobs from "@/components/_it-jobs/verticalTabJobs";
 import { fetchSpotlightCompany } from "@/services/it-jobs/itJobs.service";
+import { fetchJobs } from "@/services/api.service";
 
 export default async function ItJobs({
     params,
+    searchParams,
 }: {
-    params: { lng: string; slug: string[] };
+    params: { lng: string };
+    searchParams: { page: string; job_selected: string };
 }) {
-    const { lng, slug } = params;
+    const { lng } = params;
+    const { page, job_selected } = searchParams;
     const { t } = await useTranslation(lng, "itJobs");
 
     const tSearchText = {
@@ -47,6 +51,8 @@ export default async function ItJobs({
     };
 
     const companySpotlight = await fetchSpotlightCompany();
+    const jobs = await fetchJobs(+page, 10);
+
     return (
         <div>
             <div className="bg-custom-gradient text-white ">
@@ -184,12 +190,10 @@ export default async function ItJobs({
                     variant="h4"
                     sx={{ fontWeight: "bold", mb: "20px" }}
                 >
-                    4 <span className="text-red-500">typescript</span>{" "}
+                    {} <span className="text-red-500">typescript</span>{" "}
                     {t("job_in")} Da Nang
                 </Typography>
-                <Box>
-                    <VerticalTabJobs />
-                </Box>
+                <Box>{jobs?.data && <VerticalTabJobs jobs={jobs.data.jobs} />}</Box>
             </div>
         </div>
     );

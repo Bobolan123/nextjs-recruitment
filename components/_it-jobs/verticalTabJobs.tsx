@@ -14,6 +14,7 @@ import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import { TagHot } from "../common/tags";
 import { Button, useMediaQuery } from "@mui/material";
 import TabPanelJobDetail from "./vertical-tab/tabPanelJobDetail";
+import { IJob } from "@/types/jobs/jobs";
 
 function a11yProps(index: number) {
     return {
@@ -39,7 +40,12 @@ interface IVerticalTabJobs {
         why_working_here: string;
     };
 }
-export default function VerticalTabJobs() {
+interface IVerticalTabJobsProps {
+    jobs: IJob[];
+}
+export default function VerticalTabJobs(props: IVerticalTabJobsProps) {
+    const { jobs } = props;
+
     const isSmallScreen = useMediaQuery("(max-width:950px)");
 
     const [value, setValue] = React.useState(0);
@@ -86,91 +92,121 @@ export default function VerticalTabJobs() {
                     },
                 }}
             >
-                <Tab
-                    label={
-                        <React.Fragment>
-                            <div className="text-left ">
-                                <div className="absolute right-0 top-4">
-                                    <TagHot />
-                                </div>
-                                <Typography
-                                    variant="subtitle2"
-                                    color="textDarkGray"
-                                >
-                                    Label 1
-                                </Typography>
-                                <Link href="/it-jobs">
-                                    <Box
-                                        color="black"
-                                        mt={2}
-                                        mb={2}
-                                        fontSize={18}
-                                        sx={{ fontWeight: "bold" }}
-                                        display="flex"
-                                    >
-                                        Fulltime Remote Frontend
-                                        Javascript/Typescript/ReactJS
-                                    </Box>
-                                </Link>
-                                <Link href="/it-jobs">
-                                    <Typography
-                                        variant="subtitle1"
-                                        className="flex items-center gap-1"
-                                    >
-                                        <Image
-                                            src={robot}
-                                            width={48}
-                                            height={48}
-                                            alt="ok"
-                                        ></Image>
-                                        <span>Company name</span>
-                                    </Typography>
-                                </Link>
-                                <div className="mt-3 mb-1 pb-3 border-b-2 border-gray-200 border-dashed">
-                                    <Typography variant="subtitle1">
-                                        <PaidOutlinedIcon className="mr-1" />
+                {jobs?.map((job, index) => {
+                    return (
+                        <>
+                            <Tab
+                                label={
+                                    <React.Fragment>
+                                        <div className="text-left ">
+                                            <div className="absolute right-0 top-4">
+                                                <TagHot />
+                                            </div>
+                                            <Typography
+                                                variant="subtitle2"
+                                                color="textDarkGray"
+                                            >
+                                                Posted 1 hour ago
+                                            </Typography>
+                                            <Link href="/it-jobs">
+                                                <Box
+                                                    color="black"
+                                                    mt={2}
+                                                    mb={2}
+                                                    fontSize={18}
+                                                    sx={{ fontWeight: "bold" }}
+                                                    display="flex"
+                                                >
+                                                    {job.name}
+                                                </Box>
+                                            </Link>
+                                            <Link href="/it-jobs">
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    className="flex items-center gap-1"
+                                                >
+                                                    <Image
+                                                        src={`${process.env.NEXT_PUBLIC_SERVER_COMPANY_IMAGE}/${job.company?.logo}`}
+                                                        width={48}
+                                                        height={48}
+                                                        alt={`${job.company?.name}`}
+                                                    ></Image>
+                                                    <span>
+                                                        {job?.company?.name}
+                                                    </span>
+                                                </Typography>
+                                            </Link>
+                                            <div className="mt-3 mb-1 pb-3 border-b-2 border-gray-200 border-dashed">
+                                                <Typography variant="subtitle1">
+                                                    <PaidOutlinedIcon className="mr-1" />
 
-                                        <u>Sign in to view salary</u>
-                                    </Typography>
-                                </div>
-                                <Typography variant="subtitle1">
-                                    <ApartmentIcon
-                                        sx={{ color: "textDarkGray" }}
-                                    />
-                                    asdf
-                                </Typography>
-                                <Typography variant="subtitle1">
-                                    <FmdGoodOutlinedIcon
-                                        sx={{ color: "textDarkGray" }}
-                                    />
-                                    HCM
-                                </Typography>
-                                <div className="flex space-x-2 mt-2">
-                                    <Typography
-                                        variant="subtitle2"
-                                        sx={{
-                                            color: "#414042",
-                                            borderRadius: 100,
-                                            padding: "1px 8px",
-                                            border: 1,
-                                            borderColor: "textDarkGray",
-                                        }}
-                                    >
-                                        Java
-                                    </Typography>
-                                </div>
-                            </div>
-                        </React.Fragment>
-                    }
-                    {...a11yProps(0)}
-                />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
+                                                    <u>
+                                                        Sign in to view salary
+                                                    </u>
+                                                </Typography>
+                                            </div>
+                                            <Typography variant="subtitle1">
+                                                <ApartmentIcon
+                                                    sx={{
+                                                        color: "textDarkGray",
+                                                    }}
+                                                />
+                                                At work
+                                            </Typography>
+                                            <Typography variant="subtitle1">
+                                                <FmdGoodOutlinedIcon
+                                                    sx={{
+                                                        color: "textDarkGray",
+                                                    }}
+                                                />
+                                                {job.company?.locations
+                                                    .slice(0, 2)
+                                                    ?.map((location, index) =>
+                                                        index === 0
+                                                            ? location.city
+                                                            : ` - ${location.city}`
+                                                    )
+                                                    .join("")}{" "}
+                                            </Typography>
+                                            <div className="flex space-x-2 mt-2">
+                                                {job.skills.map((skill) => {
+                                                    return (
+                                                        <>
+                                                            <Typography
+                                                                key={skill.id}
+                                                                variant="subtitle2"
+                                                                sx={{
+                                                                    color: "#414042",
+                                                                    borderRadius: 100,
+                                                                    padding:
+                                                                        "1px 8px",
+                                                                    border: 1,
+                                                                    borderColor:
+                                                                        "textDarkGray",
+                                                                }}
+                                                            >
+                                                                {skill.name}
+                                                            </Typography>
+                                                        </>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                }
+                                {...a11yProps(index)}
+                            />
+                        </>
+                    );
+                })}
+            
+                {/* <Tab label="Item Two" {...a11yProps(1)} />
+                <Tab label="Item Three" {...a11yProps(2)} /> */} 
             </Tabs>
 
             {!isSmallScreen && (
                 <>
-                    <TabPanelJobDetail value={value} />
+                    <TabPanelJobDetail value={value} jobs={jobs}/>
                 </>
             )}
         </Box>

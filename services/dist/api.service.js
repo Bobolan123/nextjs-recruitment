@@ -36,33 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.fetchJobs = exports.fetchSpotlightCompany = void 0;
+exports.fetchJobs = void 0;
 var auth_1 = require("@/auth");
 var api_1 = require("@/utils/api");
-//Fetch companies
-exports.fetchSpotlightCompany = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var session, res;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, auth_1.auth()];
-            case 1:
-                session = _a.sent();
-                return [4 /*yield*/, api_1.sendRequest({
-                        url: process.env.NEXT_PUBLIC_SERVER + "/company/spotlight",
-                        method: "GET",
-                        headers: {
-                            Authorization: "Bearer " + (session === null || session === void 0 ? void 0 : session.accessToken)
-                        },
-                        nextOption: {
-                            next: { tags: ["spotlight-company"] }
-                        }
-                    })];
-            case 2:
-                res = _a.sent();
-                return [2 /*return*/, res];
-        }
-    });
-}); };
 //Fetch jobs
 exports.fetchJobs = function (page, limit, qs) { return __awaiter(void 0, void 0, void 0, function () {
     var session, res;
@@ -72,7 +48,7 @@ exports.fetchJobs = function (page, limit, qs) { return __awaiter(void 0, void 0
             case 1:
                 session = _a.sent();
                 return [4 /*yield*/, api_1.sendRequest({
-                        url: process.env.NEXT_PUBLIC_SERVER + "/job?page=" + page + "&limit=" + limit + "&sort=" + (qs === null || qs === void 0 ? void 0 : qs.sort),
+                        url: process.env.NEXT_PUBLIC_SERVER + "/job?page=" + (page || 1) + "&limit=" + limit + "&sort=" + (qs === null || qs === void 0 ? void 0 : qs.sort),
                         method: "GET",
                         headers: {
                             Authorization: "Bearer " + (session === null || session === void 0 ? void 0 : session.accessToken)

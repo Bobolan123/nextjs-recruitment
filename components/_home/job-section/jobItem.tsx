@@ -143,11 +143,13 @@ const JobItem = async (props: IJobItemProps) => {
                                                     key={skill.id}
                                                     variant="subtitle1"
                                                     sx={{
-                                                        color: "#414042",
-                                                        backgroundColor:
-                                                            "#f7f7f7",
+                                                        marginTop:1,
                                                         borderRadius: 100,
                                                         padding: "1px 10px",
+                                                        color: "#414042",
+                                                        border: 1,
+                                                        borderColor:
+                                                            "textDarkGray",
                                                     }}
                                                 >
                                                     {skill.name}

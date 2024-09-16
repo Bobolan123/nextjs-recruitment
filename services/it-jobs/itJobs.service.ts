@@ -18,3 +18,23 @@ export const fetchSpotlightCompany = async () => {
     });
     return res;
 };
+
+//Fetch jobs
+export const fetchJobs = async (
+    page: number,
+    limit: number,
+    qs?: { sort: string }
+) => {
+    const session = await auth();
+    const res = await sendRequest<IBackendRes<ICompany>>({
+        url: `${process.env.NEXT_PUBLIC_SERVER}/job?page=${page}&limit=${limit}&sort=${qs?.sort}`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+        },
+        nextOption: {
+            next: { tags: ["jobs"] },
+        },
+    });
+    return res;
+};
