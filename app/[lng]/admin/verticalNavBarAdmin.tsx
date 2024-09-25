@@ -10,18 +10,13 @@ import ArticleIcon from "@mui/icons-material/Article";
 import SecurityIcon from "@mui/icons-material/Security";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 import { getModule } from "@/components/_admin/navbar/actions/navbarServerActions";
 
+const moduleItems = ["company","user", "job", "resume", "role"]
 export const VerticalNavBarAdmin = () => {
-    const [modules, setModules] = useState([]);
-    useEffect(() => {
-        const getModuleById = async () => {
-            const fetchModules: any = await getModule();
-            setModules(fetchModules);
-        };
-        getModuleById();
-    }, []);
+    const [modules, setModules] = useState<string[]>(moduleItems);
 
     const moduleMapping: Record<
         string,
@@ -33,10 +28,11 @@ export const VerticalNavBarAdmin = () => {
         resume: { icon: ArticleIcon, label: "Resume" },
         api: { icon: SecurityIcon, label: "Permission" },
         role: { icon: AccountCircleIcon, label: "Role" },
+        // Add more mappings here as needed
     };
-    
+
     return (
-        <Fragment>
+        <React.Fragment>
             {modules.map((module) => {
                 const IconComponent = moduleMapping[module]?.icon;
                 const label = moduleMapping[module]?.label;
@@ -62,6 +58,6 @@ export const VerticalNavBarAdmin = () => {
                     </Link>
                 );
             })}
-        </Fragment>
+        </React.Fragment>
     );
 };

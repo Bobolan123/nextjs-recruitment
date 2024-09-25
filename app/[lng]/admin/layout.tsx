@@ -19,6 +19,7 @@ import { VerticalNavBarAdmin } from "./verticalNavBarAdmin";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import "../../globals.css"
 
 const drawerWidth: number = 240;
 
@@ -144,6 +145,7 @@ export default function Layout({
             </Toolbar>
             <Divider />
             <List component="nav">
+            
               <VerticalNavBarAdmin />
 
               <Divider sx={{ my: 1 }} />

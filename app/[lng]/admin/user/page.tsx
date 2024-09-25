@@ -17,9 +17,7 @@ import AddUserButton from "@/components/_admin/user/addUser.button";
 
 export default async function User() {
   const fetchAllUsers = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER
-
-}/user/read`,
+    `${process.env.API}/user/read`,
     {
       method: "GET",
       next: { tags: ["users"]},

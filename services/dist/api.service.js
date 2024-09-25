@@ -36,9 +36,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.fetchJobs = void 0;
+exports.fetchSkills = exports.fetchJobs = exports.fetchCompanies = void 0;
 var auth_1 = require("@/auth");
 var api_1 = require("@/utils/api");
+exports.fetchCompanies = function (page, limit, qsObject) { return __awaiter(void 0, void 0, void 0, function () {
+    var session, res;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, auth_1.auth()];
+            case 1:
+                session = _a.sent();
+                return [4 /*yield*/, api_1.sendRequest({
+                        url: process.env.NEXT_PUBLIC_SERVER + "/company",
+                        method: "GET",
+                        queryParams: {
+                            page: page,
+                            limit: limit,
+                            sort: qsObject === null || qsObject === void 0 ? void 0 : qsObject.sort
+                        },
+                        headers: {
+                            Authorization: "Bearer " + (session === null || session === void 0 ? void 0 : session.accessToken)
+                        },
+                        nextOption: {
+                            next: { tags: ["list-companies"] }
+                        }
+                    })];
+            case 2:
+                res = _a.sent();
+                return [2 /*return*/, res];
+        }
+    });
+}); };
 //Fetch jobs
 exports.fetchJobs = function (page, limit, qs) { return __awaiter(void 0, void 0, void 0, function () {
     var session, res;
@@ -55,6 +83,30 @@ exports.fetchJobs = function (page, limit, qs) { return __awaiter(void 0, void 0
                         },
                         nextOption: {
                             next: { tags: ["jobs"] }
+                        }
+                    })];
+            case 2:
+                res = _a.sent();
+                return [2 /*return*/, res];
+        }
+    });
+}); };
+//Fetch skills
+exports.fetchSkills = function (page, limit, qs) { return __awaiter(void 0, void 0, void 0, function () {
+    var session, res;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, auth_1.auth()];
+            case 1:
+                session = _a.sent();
+                return [4 /*yield*/, api_1.sendRequest({
+                        url: process.env.NEXT_PUBLIC_SERVER + "/skills?page=" + page + "&limit=" + limit + "&sort=" + (qs === null || qs === void 0 ? void 0 : qs.sort),
+                        method: "GET",
+                        headers: {
+                            Authorization: "Bearer " + (session === null || session === void 0 ? void 0 : session.accessToken)
+                        },
+                        nextOption: {
+                            next: { tags: ["skills"] }
                         }
                     })];
             case 2:
