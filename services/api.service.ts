@@ -69,7 +69,7 @@ export const fetchSkills = async (
     qs?: { sort: string }
 ) => {
     const session = await auth();
-    const res = await sendRequest<IBackendRes<ISkill>>({
+    const res = await sendRequest<IBackendRes<ISkill[]>>({
         url: `${process.env.NEXT_PUBLIC_SERVER}/skills?page=${
             page 
         }&limit=${limit}&sort=${qs?.sort}`,

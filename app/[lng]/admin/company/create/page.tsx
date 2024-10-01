@@ -6,11 +6,11 @@ import { fetchSkills } from "@/services/api.service";
 const CreateCompanyMain = async () => {
 
     const resJob = await fetchSkills()
-
-    console.log(resJob)
+    const skills = resJob?.data ?? [];
+    
     return (
         <>
-            <CreateCompany />
+            <CreateCompany skills={skills}/>
         </>
     );
 };
