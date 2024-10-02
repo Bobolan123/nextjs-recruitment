@@ -12,7 +12,6 @@ require("react-quill/dist/quill.snow.css");
 var cityAutoComplete_1 = require("../autocomplete/cityAutoComplete");
 var districtAutoComplete_1 = require("../autocomplete/districtAutoComplete");
 var subdistrictAutoComplete_1 = require("../autocomplete/subdistrictAutoComplete");
-var map_1 = require("@/components/common/map/map");
 // Dynamically import ReactQuill for client-side rendering only
 var ReactQuill = dynamic_1["default"](function () { return Promise.resolve().then(function () { return require("react-quill"); }); }, { ssr: false });
 var CreateCompany = function (props) {
@@ -133,7 +132,6 @@ var CreateCompany = function (props) {
                         React.createElement(material_1.OutlinedInput, { id: "briefIntroductoin", name: "briefIntroductoin", type: "briefIntroductoin", placeholder: "Select Street", autoComplete: "shipping briefIntroductoin", required: true, size: "small", onChange: function (e) {
                                 return setBriefIntroduction(e.target.value);
                             } }))),
-                React.createElement(map_1["default"], null),
                 React.createElement(material_1.Button, { variant: "contained", sx: { m: "auto" }, onClick: handleCreateNewCompany }, "Submit")))));
 };
 exports["default"] = CreateCompany;

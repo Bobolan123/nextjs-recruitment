@@ -23,7 +23,6 @@ import CompanyCityAutocomplete from "../autocomplete/cityAutoComplete";
 import CompanyDistrictAutocomplete from "../autocomplete/districtAutoComplete";
 import { ICity, IDistrict, ISubDistrict } from "@/types/locations/vn_location_json";
 import CompanySubdistrictAutocomplete from "../autocomplete/subdistrictAutoComplete";
-import Map from "@/components/common/map/map";
 
 // Dynamically import ReactQuill for client-side rendering only
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -324,7 +323,6 @@ const CreateCompany = (props:ICreateCompany) => {
                        
                     </Grid>
 
-                    <Map/>
                     <Button
                         variant="contained"
                         sx={{ m: "auto" }}
