@@ -153,6 +153,7 @@ const CreateCompany = (props:ICreateCompany) => {
                             </FormLabel>
                             <CompanyTypeAutocomplete
                                 setCompanyType={setCompanyType}
+                                companyType={companyType}
                             />
                         </Grid>
                         <Grid
@@ -173,6 +174,7 @@ const CreateCompany = (props:ICreateCompany) => {
                             </FormLabel>
                             <CompanyIndustryAutocomplete
                                 setCompanyIndustry={setCompanyIndustry}
+                                companyIndustry={companyIndustry}
                             />
                         </Grid>
                         <Grid
@@ -193,6 +195,7 @@ const CreateCompany = (props:ICreateCompany) => {
                             </FormLabel>
                             <CompanySizeAutocomplete
                                 setCompanySize={setCompanySize}
+                                companySize={companySize}
                             />
                         </Grid>
                         <Grid
@@ -211,7 +214,7 @@ const CreateCompany = (props:ICreateCompany) => {
                             >
                                 Country
                             </FormLabel>
-                            <AutoCompleteCountry setCountry={setCountry} />
+                            <AutoCompleteCountry setCountry={setCountry} companyCountry={country}/>
                         </Grid>
                         <Grid
                             item
@@ -308,15 +311,14 @@ const CreateCompany = (props:ICreateCompany) => {
                                 Street
                             </FormLabel>
                             <OutlinedInput
-                                id="briefIntroductoin"
-                                name="briefIntroductoin"
-                                type="briefIntroductoin"
+                                id="street"
+                                name="street"
+                                type="street"
                                 placeholder="Select Street"
-                                autoComplete="shipping briefIntroductoin"
                                 required
                                 size="small"
                                 onChange={(e: any) =>
-                                    setBriefIntroduction(e.target.value)
+                                    setStreet(e.target.value)
                                 } // Handle introduction change
                             />
                         </Grid>

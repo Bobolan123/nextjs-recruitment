@@ -74,28 +74,28 @@ var CreateCompany = function (props) {
                             flexDirection: "column"
                         } },
                         React.createElement(material_1.FormLabel, { htmlFor: "company-type", required: true, sx: { fontWeight: "bold" } }, "Company type"),
-                        React.createElement(companyTypeAutocomplete_1["default"], { setCompanyType: setCompanyType })),
+                        React.createElement(companyTypeAutocomplete_1["default"], { setCompanyType: setCompanyType, companyType: companyType })),
                     React.createElement(material_1.Grid, { item: true, xs: 3, sx: {
                             md: 6,
                             display: "flex",
                             flexDirection: "column"
                         } },
                         React.createElement(material_1.FormLabel, { htmlFor: "company-type", required: true, sx: { fontWeight: "bold" } }, "Company industry"),
-                        React.createElement(companyIndustryAutoComplete_1["default"], { setCompanyIndustry: setCompanyIndustry })),
+                        React.createElement(companyIndustryAutoComplete_1["default"], { setCompanyIndustry: setCompanyIndustry, companyIndustry: companyIndustry })),
                     React.createElement(material_1.Grid, { item: true, xs: 3, sx: {
                             md: 6,
                             display: "flex",
                             flexDirection: "column"
                         } },
                         React.createElement(material_1.FormLabel, { htmlFor: "company-size", required: true, sx: { fontWeight: "bold" } }, "Company size"),
-                        React.createElement(companySizeAutocomplete_1["default"], { setCompanySize: setCompanySize })),
+                        React.createElement(companySizeAutocomplete_1["default"], { setCompanySize: setCompanySize, companySize: companySize })),
                     React.createElement(material_1.Grid, { item: true, xs: 3, sx: {
                             md: 6,
                             display: "flex",
                             flexDirection: "column"
                         } },
                         React.createElement(material_1.FormLabel, { htmlFor: "country", required: true, sx: { fontWeight: "bold" } }, "Country"),
-                        React.createElement(countryAutocomplete_1["default"], { setCountry: setCountry })),
+                        React.createElement(countryAutocomplete_1["default"], { setCountry: setCountry, companyCountry: country })),
                     React.createElement(material_1.Grid, { item: true, xs: 12, sx: {
                             md: 6,
                             display: "flex",
@@ -129,8 +129,8 @@ var CreateCompany = function (props) {
                             flexDirection: "column"
                         } },
                         React.createElement(material_1.FormLabel, { htmlFor: "street", required: true, sx: { fontWeight: "bold", gap: 1 } }, "Street"),
-                        React.createElement(material_1.OutlinedInput, { id: "briefIntroductoin", name: "briefIntroductoin", type: "briefIntroductoin", placeholder: "Select Street", autoComplete: "shipping briefIntroductoin", required: true, size: "small", onChange: function (e) {
-                                return setBriefIntroduction(e.target.value);
+                        React.createElement(material_1.OutlinedInput, { id: "street", name: "street", type: "street", placeholder: "Select Street", required: true, size: "small", onChange: function (e) {
+                                return setStreet(e.target.value);
                             } }))),
                 React.createElement(material_1.Button, { variant: "contained", sx: { m: "auto" }, onClick: handleCreateNewCompany }, "Submit")))));
 };

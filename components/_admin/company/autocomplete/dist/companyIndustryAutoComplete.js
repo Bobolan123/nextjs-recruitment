@@ -27,7 +27,7 @@ var industryOptions = [
     { label: "Telecommunications" },
 ];
 var CompanyIndustryAutocomplete = function (props) {
-    var setCompanyIndustry = props.setCompanyIndustry;
-    return (react_1["default"].createElement(material_1.Autocomplete, { disablePortal: true, size: "small", id: "company-industry-autocomplete", options: industryOptions, getOptionLabel: function (option) { return option.label; }, onChange: function (_, value) { return setCompanyIndustry(value === null || value === void 0 ? void 0 : value.label); }, renderInput: function (params) { return (react_1["default"].createElement(material_1.TextField, __assign({}, params, { InputLabelProps: { shrink: false }, variant: "outlined" }))); } }));
+    var setCompanyIndustry = props.setCompanyIndustry, companyIndustry = props.companyIndustry;
+    return (react_1["default"].createElement(material_1.Autocomplete, { disablePortal: true, size: "small", id: "company-industry-autocomplete", options: industryOptions, getOptionLabel: function (option) { return option.label; }, onChange: function (_, value) { return setCompanyIndustry(value === null || value === void 0 ? void 0 : value.label); }, renderInput: function (params) { return (react_1["default"].createElement(material_1.TextField, __assign({}, params, { InputLabelProps: { shrink: false }, variant: "outlined", label: companyIndustry ? "" : "Select company type" }))); } }));
 };
 exports["default"] = CompanyIndustryAutocomplete;

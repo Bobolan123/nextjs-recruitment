@@ -22,11 +22,12 @@ const industryOptions: IndustryType[] = [
 
 interface ICompanyIndustryAutocompleteProps {
     setCompanyIndustry: (value: string | null) => void; // Accept the onChange prop
+    companyIndustry: string | null;
 }
 const CompanyIndustryAutocomplete = (
     props: ICompanyIndustryAutocompleteProps
 ) => {
-    const { setCompanyIndustry } = props;
+    const { setCompanyIndustry, companyIndustry } = props;
 
     return (
         <Autocomplete
@@ -41,6 +42,7 @@ const CompanyIndustryAutocomplete = (
                     {...params}
                     InputLabelProps={{ shrink: false }}
                     variant="outlined"
+                    label={companyIndustry ? "" : "Select company type"}
                 />
             )}
         />

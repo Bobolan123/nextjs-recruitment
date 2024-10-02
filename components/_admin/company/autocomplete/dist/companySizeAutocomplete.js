@@ -14,10 +14,10 @@ exports.__esModule = true;
 var react_1 = require("react");
 var material_1 = require("@mui/material");
 var CompanySizeAutocomplete = function (props) {
-    var setCompanySize = props.setCompanySize;
+    var setCompanySize = props.setCompanySize, companySize = props.companySize;
     return (react_1["default"].createElement(material_1.Autocomplete, { disablePortal: true, size: "small", id: "company-size-autocomplete", options: companySizeOptions, getOptionLabel: function (option) { return option.label; }, onChange: function (_, value) { return setCompanySize(value === null || value === void 0 ? void 0 : value.label); }, renderInput: function (params) { return (react_1["default"].createElement(material_1.TextField, __assign({}, params, { 
             // label="Company Size"
-            variant: "outlined", InputLabelProps: { shrink: false } }))); } }));
+            variant: "outlined", InputLabelProps: { shrink: false }, label: companySize ? "" : "Select company type" }))); } }));
 };
 exports["default"] = CompanySizeAutocomplete;
 var companySizeOptions = [

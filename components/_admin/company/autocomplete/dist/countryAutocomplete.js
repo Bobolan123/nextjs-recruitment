@@ -27,13 +27,13 @@ var Box_1 = require("@mui/material/Box");
 var TextField_1 = require("@mui/material/TextField");
 var Autocomplete_1 = require("@mui/material/Autocomplete");
 function CountrySelect(props) {
-    var setCountry = props.setCountry;
+    var setCountry = props.setCountry, companyCountry = props.companyCountry;
     return (React.createElement(Autocomplete_1["default"], { id: "country-select-demo", sx: { width: 300 }, options: countries, autoHighlight: true, getOptionLabel: function (option) { return option.label; }, onChange: function (_, value) { return setCountry(value === null || value === void 0 ? void 0 : value.label); }, renderOption: function (props, option) {
             var key = props.key, optionProps = __rest(props, ["key"]);
             return (React.createElement(Box_1["default"], __assign({ key: key, component: "li", sx: { '& > img': { mr: 2, flexShrink: 0 } } }, optionProps),
                 React.createElement("img", { loading: "lazy", width: "20", srcSet: "https://flagcdn.com/w40/" + option.code.toLowerCase() + ".png 2x", src: "https://flagcdn.com/w20/" + option.code.toLowerCase() + ".png", alt: "" }),
                 option.label));
-        }, renderInput: function (params) { return (React.createElement(TextField_1["default"], __assign({}, params, { size: 'small', InputLabelProps: { shrink: false } }))); } }));
+        }, renderInput: function (params) { return (React.createElement(TextField_1["default"], __assign({}, params, { size: 'small', InputLabelProps: { shrink: false }, label: companyCountry ? "" : "Select company type" }))); } }));
 }
 exports["default"] = CountrySelect;
 var countries = [

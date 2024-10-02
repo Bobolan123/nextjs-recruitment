@@ -3,11 +3,13 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-interface ICompanyTypeAutocompleteProps {
+interface ICompanyCountryAutocompleteProps {
   setCountry: (value: string | null) => void;  // Accept the onChange prop
+  companyCountry: string | null;
+
 }  
-export default function CountrySelect(props:ICompanyTypeAutocompleteProps) {
-  const {setCountry} = props
+export default function CountrySelect(props:ICompanyCountryAutocompleteProps) {
+  const {setCountry, companyCountry} = props
 
   return (
     <Autocomplete
@@ -43,7 +45,7 @@ export default function CountrySelect(props:ICompanyTypeAutocompleteProps) {
           {...params}
           size='small'
           InputLabelProps={{shrink: false}}
-
+          label={companyCountry ? "" : "Select company type"}
         />
       )}
     />

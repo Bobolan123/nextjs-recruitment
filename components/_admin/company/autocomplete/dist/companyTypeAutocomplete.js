@@ -14,8 +14,8 @@ exports.__esModule = true;
 var react_1 = require("react");
 var material_1 = require("@mui/material");
 var CompanyTypeAutocomplete = function (props) {
-    var setCompanyType = props.setCompanyType;
-    return (react_1["default"].createElement(material_1.Autocomplete, { size: "small", disablePortal: true, id: "company-type-autocomplete", options: companyTypes, getOptionLabel: function (option) { return option.label; }, onChange: function (_, value) { return setCompanyType(value === null || value === void 0 ? void 0 : value.label); }, renderInput: function (params) { return (react_1["default"].createElement(material_1.TextField, __assign({}, params, { variant: "outlined", InputLabelProps: { shrink: false } }))); } }));
+    var setCompanyType = props.setCompanyType, companyType = props.companyType;
+    return (react_1["default"].createElement(material_1.Autocomplete, { size: "small", disablePortal: true, id: "company-type-autocomplete", options: companyTypes, getOptionLabel: function (option) { return option.label; }, onChange: function (_, value) { return setCompanyType(value === null || value === void 0 ? void 0 : value.label); }, renderInput: function (params) { return (react_1["default"].createElement(material_1.TextField, __assign({}, params, { variant: "outlined", InputLabelProps: { shrink: false }, label: companyType ? "" : "Select company type" }))); } }));
 };
 exports["default"] = CompanyTypeAutocomplete;
 var companyTypes = [

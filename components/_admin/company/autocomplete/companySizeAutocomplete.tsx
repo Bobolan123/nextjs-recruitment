@@ -3,9 +3,11 @@ import { Autocomplete, TextField } from "@mui/material";
 
 interface ICompanySizeAutocompleteProps {
     setCompanySize: (value: string | null) => void;  // Accept the onChange prop
+    companySize:string |null
+
   }  
 const CompanySizeAutocomplete = (props:ICompanySizeAutocompleteProps) => {
-    const {setCompanySize} = props
+    const {setCompanySize, companySize} = props
 
   
     return (
@@ -23,6 +25,8 @@ const CompanySizeAutocomplete = (props:ICompanySizeAutocompleteProps) => {
                     // label="Company Size"
                     variant="outlined"
                     InputLabelProps={{shrink: false}}
+                    label={companySize?"":"Select company type"}
+
 
                 />
             )}

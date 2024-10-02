@@ -3,9 +3,10 @@ import { Autocomplete, TextField } from "@mui/material";
 
 interface ICompanyTypeAutocompleteProps {
     setCompanyType: (value: string | null) => void; // Accept the onChange prop
+    companyType:string |null
 }
 const CompanyTypeAutocomplete = (props: ICompanyTypeAutocompleteProps) => {
-    const { setCompanyType } = props;
+    const { setCompanyType,companyType } = props;
 
     return (
         <Autocomplete
@@ -20,6 +21,7 @@ const CompanyTypeAutocomplete = (props: ICompanyTypeAutocompleteProps) => {
                     {...params}
                     variant="outlined"
                     InputLabelProps={{ shrink: false }}
+                    label={companyType?"":"Select company type"}
                 />
             )}
         />
